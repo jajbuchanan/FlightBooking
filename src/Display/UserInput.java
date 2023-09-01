@@ -1,0 +1,67 @@
+package Display;
+import java.util.*;
+import Passenger.*;
+import Plane.*;
+import Logic.*;
+
+public class UserInput {
+    private Flight flight;
+    Scanner keyboard = new Scanner(System.in);
+    InputLogic logic;
+
+    // constructor
+
+    public UserInput(Flight flight) {
+        this.keyboard = new Scanner(System.in);
+        this.flight = flight;
+        this.logic = new InputLogic(flight); // initialize logic here after flight is set
+    }
+
+    public String seatNumberInput() {
+        String input;
+        while (true) {
+            System.out.println("Enter the seat number (e.g. 7A): ");
+            input = keyboard.next();
+            try {
+                if (logic.seatValidator(input)) {
+                    return input;
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid input. Enter a valid seat.");
+            }
+        }
+    }
+
+    // methods to get passenger input
+
+    public String getPassengerClass() {
+        String input;
+        System.out.println("Enter the choice of class (First, Business, Traveller): ");
+        input = keyboard.next().toUpperCase();
+
+        try {
+            PassengerClass passengerClass = PassengerClass.valueOf(input);
+            return passengerClass.toString();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input. Please enter a valid class.");
+            throw new IllegalArgumentException("Invalid input for passenger class.");
+        }
+    }
+
+    public char returnSeatLetter(String input) {
+        return input.charAt(input.length() - 1);
+    }
+
+    public int returnSeatRow(String input) {
+        String seatInput = input.toUpperCase();
+        return Integer.parseInt(seatInput.substring(0, seatInput.length() - 1)); // -1 because array index starts at 0
+    }
+
+    public void userSeatBooking(Passenger passenger, Seat seat) {
+        passenger = passenger.createPassenger();
+
+        Booking booking = new Booking(passenger, seat);
+    }
+
+
+}
