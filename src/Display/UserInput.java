@@ -5,9 +5,10 @@ import Plane.*;
 import Logic.*;
 
 public class UserInput {
-    private Flight flight;
     Scanner keyboard = new Scanner(System.in);
     InputLogic logic;
+
+    private Flight flight;
 
     // constructor
 

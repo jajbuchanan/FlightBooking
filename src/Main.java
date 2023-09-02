@@ -1,3 +1,4 @@
+import Passenger.BookingManager;
 import Plane.*;
 import Display.*;
 
@@ -10,14 +11,10 @@ public class Main {
         // pass the flight instance to the UserInterface method
         UserInput input = new UserInput(flight);
         Display display = new Display(flight);
+        BookingManager bookingManager = new BookingManager(flight);
 
-        flight.printAllCabins();
+        bookingManager.newBooking();
 
-        input.userSeatBooking();
-
-        flight.printAllCabins();
-
-        //  	display.displayClassSeats();
 
 
 

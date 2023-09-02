@@ -1,5 +1,5 @@
 package Plane;
 
 public enum SeatType {
-    WINDOW, STANDARD, MIDDLE, AISLE;
+    WINDOW, STANDARD, MIDDLE, AISLE
 }

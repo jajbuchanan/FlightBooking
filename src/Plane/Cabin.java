@@ -4,7 +4,7 @@ public class Cabin {
     protected int startRow;
     protected int numRows = 10; // Default value
     public char[] seatLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-    protected Seat[][] seats;
+    public Seat[][] seats;
 
     public Cabin(int startRow) {
         this.startRow = startRow;
@@ -45,6 +45,7 @@ public class Cabin {
         return seatLetters;
     }
 
+    // iterate through all of the seat letters in the seatLetters array to identify the index in the line
     public int getSeatLetterIndex(char letter) {
         for (int i = 0; i < seatLetters.length; i++) {
             if (seatLetters[i] == letter) {
@@ -56,18 +57,6 @@ public class Cabin {
 
     public int getStartRow() {
         return startRow;
-    }
-
-    public void setStartRow(int startRow) {
-        this.startRow = startRow;
-    }
-
-    public int getNumRows() {
-        return numRows;
-    }
-
-    public void setNumRows(int numRows) {
-        this.numRows = numRows;
     }
 
     // define method to print info for all seats in class

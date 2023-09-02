@@ -20,8 +20,14 @@ public class Booking {
     public Booking(Passenger passenger, Seat seat) {
         this.passenger = passenger;
         this.seat = seat;
+        this.seat.bookSeat(passenger);
         this.bookingID = bookingCounter++;
     }
+
+
+
+
+
 
     public Passenger getPassenger() {
         return this.passenger;
@@ -66,4 +72,6 @@ public class Booking {
     public void setSeat(Seat seat) {
         this.seat = seat;
     }
+
+
 }

@@ -1,9 +1,10 @@
 package Plane;
+import Passenger.*;
 
 public class Flight {
-    private FirstClassCabin firstClassCabin;
-    private BusinessClassCabin businessClassCabin;
-    private TravellerClassCabin travellerClassCabin;
+    public final FirstClassCabin firstClassCabin;
+    public final BusinessClassCabin businessClassCabin;
+    public final TravellerClassCabin travellerClassCabin;
 
     public Flight() {
         this.firstClassCabin = new FirstClassCabin(1);
@@ -34,6 +35,27 @@ public class Flight {
     }
 
     // define seat booking functions
+    
+    public void bookSeat(
+            PassengerClass passengerClass,
+            int relativeRowNum,
+            int seatLetterIndex,
+            Passenger passenger) {
+        switch (passengerClass) {
+            case FIRST: {
+                firstClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passengerClass, relativeRowNum, seatLetterIndex, passenger);
+                firstClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
+            }
+            case BUSINESS: {
+                businessClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passengerClass, relativeRowNum, seatLetterIndex, passenger);
+                businessClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
+            }
+            case TRAVELLER: {
+                travellerClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passengerClass, relativeRowNum, seatLetterIndex, passenger);
+                travellerClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
+            }
+        }
+    }
 
     // define getters for the cabins' numRows
     public int getClassRows(PassengerClass cabinType) {
@@ -80,7 +102,6 @@ public class Flight {
             case FIRST -> firstClassCabin;
             case BUSINESS -> businessClassCabin;
             case TRAVELLER -> travellerClassCabin;
-            default -> throw new IllegalArgumentException("Illegal class type.");
         };
     }
 

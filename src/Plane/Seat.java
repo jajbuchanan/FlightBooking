@@ -8,9 +8,31 @@ public class Seat {
     private int seatRow;
     private char seatLetter;
 
-    // define a constructor for the class
 
+    // define a constructor for the class
     public Seat() { this.isBooked = false; }
+
+    public void seatInfo() {
+        System.out.println();
+        System.out.println("Plane.Seat information for seat " + seatRow + seatLetter);
+        System.out.println("Plane.Seat type: " + type);
+        System.out.println("Plane.Seat is booked: " + isBooked);
+        if (isBooked) {
+            System.out.println("Passenger.Passenger first name: " + passenger.getFirstName());
+            System.out.println("Passenger.Passenger last name: " + passenger.getLastName());
+            System.out.println("Passport number: " + passenger.getPassportNumber());
+        }
+    }
+    
+    public Seat bookSeat(
+            PassengerClass cabinClass,
+            int relativeRow,
+            int seatLetterIndex,
+            Passenger passenger) {
+        this.setPassenger(passenger);
+        Seat bookedSeat =;
+        return bookedSeat;
+    }
 
     public Passenger getPassenger() { return passenger; }
 
@@ -56,17 +78,7 @@ public class Seat {
         this.seatLetter = seatLetter;
     }
 
-    public void seatInfo() {
-        System.out.println();
-        System.out.println("Plane.Seat information for seat " + seatRow + seatLetter);
-        System.out.println("Plane.Seat type: " + type);
-        System.out.println("Plane.Seat is booked: " + isBooked);
-        if (isBooked) {
-            System.out.println("Passenger.Passenger first name: " + passenger.getFirstName());
-            System.out.println("Passenger.Passenger last name: " + passenger.getLastName());
-            System.out.println("Passport number: " + passenger.getPassportNumber());
-        }
-    }
+
 
     // define seat booking method
 }
