@@ -26,14 +26,8 @@ public class Seat {
     }
 
     public void bookSeat(
-            PassengerClass cabinClass,
-            int seatRowInput,
-            char seatLetterInput,
             Passenger passengerInput) {
         passenger = passengerInput;
-        seatRow = seatRowInput;
-        seatLetter = seatLetterInput;
-        seatNumber = String.valueOf(seatRow + seatLetter);
     }
 
     public Passenger getPassenger() { return passenger; }
