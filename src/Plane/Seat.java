@@ -7,7 +7,7 @@ public class Seat {
     private Passenger passenger;
     private int seatRow;
     private char seatLetter;
-    private String seatNumber = String.valueOf(seatRow + seatLetter);
+    private String seatNumber;
 
 
     // define a constructor for the class
@@ -75,11 +75,11 @@ public class Seat {
     }
 
     public String getSeatNumber() {
-        return seatNumber;
+        return String.valueOf(seatRow + seatLetter);
     }
 
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
+    public void setSeatNumber(int seatRow, char seatLetter) {
+        this.seatNumber = String.valueOf(seatRow + seatLetter);
     }
 
 // define seat booking method

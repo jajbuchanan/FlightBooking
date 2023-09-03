@@ -1,4 +1,5 @@
 import Passenger.BookingManager;
+import Passenger.Passenger;
 import Plane.*;
 import Display.*;
 
@@ -13,10 +14,11 @@ public class Main {
         Display display = new Display(flight);
         BookingManager bookingManager = new BookingManager(flight);
 
-        bookingManager.newBooking();
+        Passenger newPassenger = new Passenger();
+        newPassenger.createPassenger();
+        newPassenger.getPassengerDetails();
 
-
-
+        // bookingManager.newBooking();
 
     }
 }

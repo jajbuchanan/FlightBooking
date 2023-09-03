@@ -43,16 +43,19 @@ public class Flight {
             Passenger passenger) {
         switch (passengerClass) {
             case FIRST: {
-                firstClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passengerClass, relativeRowNum, seatLetterIndex, passenger);
+               // firstClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
                 firstClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
+                break;
             }
             case BUSINESS: {
-                businessClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passengerClass, relativeRowNum, seatLetterIndex, passenger);
+              //  businessClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
                 businessClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
+                break;
             }
             case TRAVELLER: {
-                travellerClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passengerClass, relativeRowNum, seatLetterIndex, passenger);
+             //   travellerClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
                 travellerClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
+                break;
             }
         }
     }
@@ -103,6 +106,20 @@ public class Flight {
             case BUSINESS -> businessClassCabin;
             case TRAVELLER -> travellerClassCabin;
         };
+    }
+
+    public void getSeatInfo(PassengerClass passengerClass, int relativeRow, int seatLetterIndex) {
+        switch (passengerClass) {
+            case FIRST:
+                firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+                break;
+            case BUSINESS:
+                businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+                break;
+            case TRAVELLER:
+                travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+                break;
+        }
     }
 
 }

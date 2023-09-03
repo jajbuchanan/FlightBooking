@@ -59,7 +59,11 @@ public class Passenger {
     }
 
 
-
+    public void getPassengerDetails() {
+        System.out.println("Passenger first name: " + getFirstName());
+        System.out.println("Passenger last name: " + getLastName());
+        System.out.println("Passenger passport number: " + getPassportNumber());
+    }
 
     public String getFirstName() {
         return firstName;
@@ -92,4 +96,5 @@ public class Passenger {
     public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
+
 }
