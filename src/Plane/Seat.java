@@ -7,6 +7,7 @@ public class Seat {
     private Passenger passenger;
     private int seatRow;
     private char seatLetter;
+    private String seatNumber = String.valueOf(seatRow + seatLetter);
 
 
     // define a constructor for the class
@@ -23,15 +24,16 @@ public class Seat {
             System.out.println("Passport number: " + passenger.getPassportNumber());
         }
     }
-    
-    public Seat bookSeat(
+
+    public void bookSeat(
             PassengerClass cabinClass,
-            int relativeRow,
-            int seatLetterIndex,
-            Passenger passenger) {
-        this.setPassenger(passenger);
-        Seat bookedSeat =;
-        return bookedSeat;
+            int seatRowInput,
+            char seatLetterInput,
+            Passenger passengerInput) {
+        passenger = passengerInput;
+        seatRow = seatRowInput;
+        seatLetter = seatLetterInput;
+        seatNumber = String.valueOf(seatRow + seatLetter);
     }
 
     public Passenger getPassenger() { return passenger; }
@@ -78,7 +80,13 @@ public class Seat {
         this.seatLetter = seatLetter;
     }
 
+    public String getSeatNumber() {
+        return seatNumber;
+    }
 
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+    }
 
-    // define seat booking method
+// define seat booking method
 }

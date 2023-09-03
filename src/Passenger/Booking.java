@@ -20,7 +20,7 @@ public class Booking {
     public Booking(Passenger passenger, Seat seat) {
         this.passenger = passenger;
         this.seat = seat;
-        this.seat.bookSeat(passenger);
+        this.seat.bookSeat(cabinClass, seatRow, seatLetter, passenger);
         this.bookingID = bookingCounter++;
     }
 

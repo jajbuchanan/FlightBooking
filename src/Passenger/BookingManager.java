@@ -3,6 +3,7 @@ import Display.*;
 import Plane.*;
 import Logic.*;
 
+
 import java.util.*;
 
 public class BookingManager {
@@ -20,7 +21,9 @@ public class BookingManager {
     public void newBooking() {
         // get new passenger information
         Passenger passenger = new Passenger();
+        System.out.println(passenger);
         passenger = passenger.createPassenger();
+        System.out.println(passenger);
 
 
 
@@ -31,7 +34,8 @@ public class BookingManager {
         char seatLetter = logic.returnSeatLetter(seatNumber);
         int seatLetterIndex = flight.classSeatLetterIndex(cabinClass, seatLetter);
         int relativeRow = logic.getRelativeSeatRow(cabinClass, seatRow);
-        Seat[][] bookedCabin = flight.firstClassCabin.
+        Seat bookedSeat = flight.firstClassCabin.seats[relativeRow][seatLetterIndex];
+        bookedSeat.bookSeat();
 
 
         // input information into a new Booking

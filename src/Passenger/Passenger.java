@@ -8,6 +8,9 @@ public class Passenger {
     private String passportNumber;
     private String seatNumber;
 
+    private SeatType seatType;
+    private PassengerClass passengerClass;
+
     Scanner keyboard = new Scanner(System.in);
 
     public Passenger() {
