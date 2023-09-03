@@ -66,7 +66,6 @@ public class Flight {
             case FIRST -> firstClassCabin.numRows;
             case BUSINESS -> businessClassCabin.numRows;
             case TRAVELLER -> travellerClassCabin.numRows;
-            default -> throw new IllegalArgumentException("Unknown cabin type: " + cabinType);
         };
     }
 
@@ -76,7 +75,6 @@ public class Flight {
             case FIRST -> firstClassCabin.seatLetters;
             case BUSINESS -> businessClassCabin.seatLetters;
             case TRAVELLER -> travellerClassCabin.seatLetters;
-            default -> throw new IllegalArgumentException("Unknown cabin type: " + cabinType);
         };
     }
 
@@ -87,7 +85,6 @@ public class Flight {
             case FIRST -> firstClassCabin.getSeatLetterIndex(seatLetter);
             case BUSINESS -> businessClassCabin.getSeatLetterIndex(seatLetter);
             case TRAVELLER -> travellerClassCabin.getSeatLetterIndex(seatLetter);
-            default -> (Integer) null;
         };
     }
 
@@ -96,7 +93,6 @@ public class Flight {
             case FIRST -> firstClassCabin.seats;
             case BUSINESS -> businessClassCabin.seats;
             case TRAVELLER -> travellerClassCabin.seats;
-            default -> throw new IllegalArgumentException("Illegal class type.");
         };
     }
 
@@ -110,15 +106,9 @@ public class Flight {
 
     public void getSeatInfo(PassengerClass passengerClass, int relativeRow, int seatLetterIndex) {
         switch (passengerClass) {
-            case FIRST:
-                firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-                break;
-            case BUSINESS:
-                businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-                break;
-            case TRAVELLER:
-                travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-                break;
+            case FIRST -> firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+            case BUSINESS -> businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+            case TRAVELLER -> travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
         }
     }
 
