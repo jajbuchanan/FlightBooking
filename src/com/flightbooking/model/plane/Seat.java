@@ -57,6 +57,9 @@ public class Seat {
     public boolean isBooked() {
         return isBooked;
     }
+    public boolean isAvailable() {
+        return !isBooked;
+    }
 
     public void setBooked(boolean booked) {
         isBooked = booked;
@@ -87,4 +90,17 @@ public class Seat {
     }
 
 // define seat booking method
+
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "type=" + type +
+                ", isBooked=" + isBooked +
+                ", passenger=" + passenger +
+                ", seatRow=" + seatRow +
+                ", seatLetter=" + seatLetter +
+                ", seatNumber='" + seatNumber + '\'' +
+                '}';
+    }
 }

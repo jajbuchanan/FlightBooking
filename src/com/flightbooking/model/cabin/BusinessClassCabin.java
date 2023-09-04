@@ -7,7 +7,7 @@ public class BusinessClassCabin extends Cabin {
 
 
     public BusinessClassCabin(int startRow) {
-        super(startRow);
+        //super(startRow);
 
         seatLetters = new char[]{'A', 'C', 'D', 'E', 'F', 'H'};
     }
@@ -23,7 +23,7 @@ public class BusinessClassCabin extends Cabin {
         System.out.println("\t   A\t   C\t  D\t\t  E\t\t   F\t   H");
 
         for (int rowNumber = 0; rowNumber < this.getNumberOfRows(); rowNumber++) {
-            System.out.print(startRow + rowNumber + "\t");
+            System.out.print( rowNumber + "\t");
 
             for (Seat seat : this.seats[rowNumber]) {
                 if (seat.isBooked()) {

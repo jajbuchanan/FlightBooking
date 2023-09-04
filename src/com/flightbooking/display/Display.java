@@ -3,7 +3,6 @@ package com.flightbooking.display;
 import com.flightbooking.model.plane.Flight;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
-import com.flightbooking.model.plane.SeatType;
 
 import java.util.Scanner;
 
@@ -39,33 +38,52 @@ public class Display {
         }
     }
 
-    public void chooseSeatByTypeGivenClass(PassengerClass chosenClass) {
+    public void chooseSeatByTypeGivenClass(PassengerClass passengerClass) {
 
         try {
 //
-            System.out.println("chosenClass: " + chosenClass);
+            System.out.println("chosenClass: " + passengerClass);
 
 
-            System.out.println("Enter the seat type: window, aisle, .... class (First, Business, Traveller): ");
+            System.out.println(" Enter the choice of seat type (window, standard, aisle) or seat number: ");
 
-            String classChoice = keyboard.next().toUpperCase();
+            String userSeatSelectiong = keyboard.next().toUpperCase();
 
-            System.out.println("choice" + classChoice);
+            System.out.println("userSeatSelectiong: " + userSeatSelectiong);
 
-            SeatType seatType = SeatType.valueOf(classChoice);
+   boolean isIndividualSeatAvailable= flight.isSpecificSeatAvailable(passengerClass,userSeatSelectiong);
 
-            System.out.println("seatType" + seatType);
+   System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
 
-            System.out.println("priting class sets for this flight");
+
+   if(userSeatSelectiong.matches("[0-9A-Z]+")&& !isIndividualSeatAvailable){
+
+       System.out.println("use wanted a speicific seat, but not availale: + ");
+
+       System.out.println("choose a specific seat again");
+
+        userSeatSelectiong = keyboard.next().toUpperCase();
+
+       System.out.println("user seat choce " + userSeatSelectiong);
+
+        isIndividualSeatAvailable= flight.isSpecificSeatAvailable(passengerClass,userSeatSelectiong);
+   }
+
+            // /./first
+ //  SeatType seatType = SeatType.valueOf(userSeatSelectiong);
+
+         //   System.out.println("seatType" + seatType);
+
+         //   System.out.println("priting class sets for this flight");
 
 //      flight.displayClassSeats(seatType);
-            ////        //   PassengerClass chosenClass = PassengerClass.valueOf(classChoice);
+            ////        //   PassengerClass chosenClass = PassengerClass.valueOf(userSeatSelectiong);
 
 
       //      this.flight.displayseatsbytypebyclass(chosenClass,seatType);
 
 
-            //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(classChoice));
+            //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(userSeatSelectiong));
             //       int startRow = flight.getClassCabin(chosenClass).getStartRow();
             //    printSeatMap(chosenClass, seats, startRow);
         } catch (IllegalArgumentException e) {

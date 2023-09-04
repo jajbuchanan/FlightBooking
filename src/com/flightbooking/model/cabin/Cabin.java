@@ -8,12 +8,11 @@ public abstract class Cabin {
     public Seat[][] seats;
     //
     // protected int numRows = 10; // Default value
-    protected int startRow;
+    //protected int startRow;
 
-    public Cabin(int startRow) {
+    /*public Cabin(int startRow) {
         this.startRow = startRow;
-    }
-
+    }*/
     public abstract int getNumberOfRows();
 
     public abstract void printSeatingChart();
@@ -30,7 +29,7 @@ public abstract class Cabin {
             for (int j = 0; j < seatLetters.length; j++) {
 
                 seats[i][j] = new Seat();
-                seats[i][j].setSeatRow(startRow + i); // because seat rows start from 1
+              //  seats[i][j].setSeatRow(startRow + i); // because seat rows start from 1
                 seats[i][j].setSeatLetter((seatLetters[j]));
 
                 // assign seat types based on seat letters
@@ -72,14 +71,14 @@ public abstract class Cabin {
     }
 
     // define method to print info for all seats in class
-
+/*
     public int getStartRow() {
         return startRow;
     }
 
     public void setStartRow(int startRow) {
         this.startRow = startRow;
-    }
+    }*/
 
     public void cabinSeatInfo() {
         for (int i = 0; i < this.getNumberOfRows(); i++) {

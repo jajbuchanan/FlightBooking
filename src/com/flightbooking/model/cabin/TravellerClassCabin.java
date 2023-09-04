@@ -6,7 +6,7 @@ import com.flightbooking.model.plane.SeatType;
 public class TravellerClassCabin extends Cabin {
 
     public TravellerClassCabin(int startRow) {
-        super(startRow);
+   //     super(startRow);
         seatLetters = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 
     }
@@ -22,7 +22,7 @@ public class TravellerClassCabin extends Cabin {
         System.out.println("\t   A\t   C\t  D\t\t  E\t\t   F\t   H");
 
         for (int rowNumber = 0; rowNumber < this.getNumberOfRows(); rowNumber++) {
-            System.out.print(startRow + rowNumber + "\t");
+            System.out.print( rowNumber + "\t");
 
             for (Seat seat : this.seats[rowNumber]) {
                 if (seat.isBooked()) {

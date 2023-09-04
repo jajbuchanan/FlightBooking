@@ -21,17 +21,23 @@ public class FlightBookingApplication {
         display.chooseSeatByTypeGivenClass(passengerClass);
         // bookingManager.newBooking();
 
-        if (true) System.exit(0);
+
 
         // pass the flight instance to the UserInterface method
-        UserInput input = new UserInput(flight);
+      //  UserInput input = new UserInput(flight);
 //
+//
+
+
+
+
+
 
         Passenger passenger = new Passenger();
 
         passenger.createPassenger();
 
-        //
+        if (true) System.exit(0);   //
 
 
         //   --      display.printSeatMap(PassengerClass.FIRST);
