@@ -9,12 +9,19 @@ public class Main {
         Flight flight = new Flight();
         flight.initialize();
 
+        flight.printSeatingMap();
+
+        if(true)System.exit(0);
         // pass the flight instance to the UserInterface method
         UserInput input = new UserInput(flight);
         Display display = new Display(flight);
         BookingManager bookingManager = new BookingManager(flight);
 
-        bookingManager.newBooking();
+      //  display.printSeatMap(PassengerClass.FIRST);
+
+        // bookingManager.newBooking();
 
     }
+
+    public void printSeatingMap(){}
 }

@@ -104,4 +104,17 @@ public class Flight {
         }
     }
 
+    public void printSeatingMap(){
+
+        System.out.println("printing the seat chart for the entire flight");
+
+       this.firstClassCabin.printSeatingChgart();
+
+        this.businessClassCabin.printSeatingChgart();
+
+        this.travellerClassCabin.printSeatingChgart();
+
+
+    }
+
 }
