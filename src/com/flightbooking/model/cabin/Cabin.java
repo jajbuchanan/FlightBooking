@@ -9,6 +9,7 @@ public abstract class Cabin {
     //
     // protected int numRows = 10; // Default value
     protected int startRow;
+
     public Cabin(int startRow) {
         this.startRow = startRow;
     }
@@ -18,7 +19,9 @@ public abstract class Cabin {
     public abstract void printSeatingChart();
     // declare method to initialise seats
 
-    public void initializeSeats(String cabinClass) {
+    public  abstract void  printSeatsBySeatType(SeatType seatType);
+
+        public void initializeSeats(String cabinClass) {
 
         seats = new Seat[this.getNumberOfRows()][seatLetters.length];
 

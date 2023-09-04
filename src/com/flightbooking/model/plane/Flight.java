@@ -8,7 +8,9 @@ import com.flightbooking.passenger.Passenger;
 
 public class Flight {
     private final FirstClassCabin firstClassCabin;
+
     private final BusinessClassCabin businessClassCabin;
+
     private final TravellerClassCabin travellerClassCabin;
 
     public Flight() {
@@ -84,12 +86,23 @@ public class Flight {
     }
 
 
-    public Seat[][] displayClassSeats(PassengerClass pClass) {
-        return switch (pClass) {
-            case FIRST -> firstClassCabin.seats;
-            case BUSINESS -> businessClassCabin.seats;
-            case TRAVELLER -> travellerClassCabin.seats;
-        };
+    public void displayClassSeats(PassengerClass pClass) {
+        switch (pClass) {
+            case FIRST -> this.firstClassCabin.printSeatingChart();
+            case BUSINESS -> this.businessClassCabin.printSeatingChart();
+            case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
+        }
+        ;
+    }
+
+    private void displayseatsbytypebyclass(PassengerClass pClass,
+                                          SeatType seatType ) {
+        switch (pClass) {
+            case FIRST -> this.firstClassCabin.printSeatsBySeatType(seatType);
+       //     case BUSINESS -> this.businessClassCabin.printSeatingChart();
+   //         case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
+        }
+        ;
     }
 
     public Cabin getClassCabin(PassengerClass pClass) {
@@ -120,5 +133,6 @@ public class Flight {
 
 
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.flightbooking.model.cabin;
 
 import com.flightbooking.model.plane.Seat;
+import com.flightbooking.model.plane.SeatType;
 
 public class TravellerClassCabin extends Cabin {
 
@@ -33,6 +34,11 @@ public class TravellerClassCabin extends Cabin {
             System.out.println();
             System.out.println();
         }
+
+    }
+
+    @Override
+    public void printSeatsBySeatType(SeatType seatType) {
 
     }
 }

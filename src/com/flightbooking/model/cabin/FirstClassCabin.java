@@ -1,6 +1,7 @@
 package com.flightbooking.model.cabin;
 
 import com.flightbooking.model.plane.Seat;
+import com.flightbooking.model.plane.SeatType;
 
 public class FirstClassCabin extends Cabin {
 
@@ -30,6 +31,29 @@ public class FirstClassCabin extends Cabin {
                     System.out.print("  X\t");
                 } else {
                     System.out.print(seat.getType() + "\t");
+                }
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
+
+    @Override
+    public void printSeatsBySeatType(SeatType seatType) {
+        System.out.println("\t printSeatsBySeatType printSeatsBySeatType printSeatsBySeatTypefirst" +
+                "  H");
+        System.out.println("\t   A\t  D\t\t  E\t\t   H");
+
+        for (int rowNumber = 0; rowNumber < this.getNumberOfRows(); rowNumber++) {
+            System.out.print(startRow + rowNumber + "\t");
+
+            for (Seat seat : this.seats[rowNumber]) {
+
+                if (seat.getType() == seatType) {
+
+                    System.out.print("  X\t");
+                } else {
+                     System.out.print(seat.getType() + "\t");
                 }
             }
             System.out.println();
