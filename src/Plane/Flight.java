@@ -2,9 +2,9 @@ package Plane;
 import Passenger.*;
 
 public class Flight {
-    public final FirstClassCabin firstClassCabin;
-    public final BusinessClassCabin businessClassCabin;
-    public final TravellerClassCabin travellerClassCabin;
+    private final FirstClassCabin firstClassCabin;
+    private final BusinessClassCabin businessClassCabin;
+    private final TravellerClassCabin travellerClassCabin;
 
     public Flight() {
         this.firstClassCabin = new FirstClassCabin(1);
@@ -78,15 +78,7 @@ public class Flight {
         };
     }
 
-    // return the index of the seat letter from the list of letters in each cabin class
-    @SuppressWarnings("null")
-    public int classSeatLetterIndex(PassengerClass passengerClass, char seatLetter) {
-        return switch (passengerClass) {
-            case FIRST -> firstClassCabin.getSeatLetterIndex(seatLetter);
-            case BUSINESS -> businessClassCabin.getSeatLetterIndex(seatLetter);
-            case TRAVELLER -> travellerClassCabin.getSeatLetterIndex(seatLetter);
-        };
-    }
+
 
     public Seat[][] displayClassSeats(PassengerClass pClass) {
         return switch (pClass) {

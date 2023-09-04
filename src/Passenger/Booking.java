@@ -5,7 +5,7 @@ import Passenger.*;
 public class Booking {
     // details booking information
 
-    private static int bookingCounter = 0; // for unique booking ID
+    private static int bookingCounter = 44523; // for unique booking ID
     private final int bookingID;
 
     // details passenger information
@@ -24,7 +24,9 @@ public class Booking {
         this.bookingID = bookingCounter++;
     }
 
-
+    public String bookingRef() {
+        return String.valueOf("BR" + bookingID);
+    }
 
 
 

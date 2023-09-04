@@ -55,6 +55,7 @@ public class Passenger {
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input. Passport number must be 9 characters in length.");
             }
+            System.out.println("Invalid passport number. Passport number must be 9 characters in length.");
         }
     }
 

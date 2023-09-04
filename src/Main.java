@@ -14,11 +14,7 @@ public class Main {
         Display display = new Display(flight);
         BookingManager bookingManager = new BookingManager(flight);
 
-        Passenger newPassenger = new Passenger();
-        newPassenger.createPassenger();
-        newPassenger.getPassengerDetails();
-
-        // bookingManager.newBooking();
+        bookingManager.newBooking();
 
     }
 }

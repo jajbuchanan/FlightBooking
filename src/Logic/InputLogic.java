@@ -26,16 +26,16 @@ public class InputLogic {
             PassengerClass pClass,
             int rowNum) {
         return switch (pClass) {
-            case FIRST -> rowNum;
-            case BUSINESS -> rowNum - flight.getClassRows(PassengerClass.FIRST);
+            case FIRST -> rowNum - 1;
+            case BUSINESS ->
+                    rowNum - flight.getClassRows(PassengerClass.FIRST)
+                    - 1;
             case TRAVELLER ->
-                    rowNum - (flight.getClassRows(PassengerClass.FIRST) + flight.getClassRows(PassengerClass.BUSINESS));
+                    rowNum - (flight.getClassRows(PassengerClass.FIRST)
+                            + flight.getClassRows(PassengerClass.BUSINESS))
+                            - 1;
             default -> throw new IllegalArgumentException("Invalid class type: " + pClass);
         };
-    }
-
-    public int classSeatColumn(PassengerClass passengerClass, char seatLetter) {
-        return flight.classSeatLetterIndex(passengerClass, seatLetter);
     }
 
     // Method to ask user for a seat number - returns the class the seat is in:
@@ -91,6 +91,16 @@ public class InputLogic {
                     - flight.getClassRows(PassengerClass.BUSINESS);
                     yield classRow;
             }
+        };
+    }
+
+    public int returnSeatLetterRelativeIndex(
+            PassengerClass passengerClass,
+            char seatLetter) {
+        return switch (passengerClass) {
+            case FIRST -> flight.getClassCabin(PassengerClass.FIRST).getSeatLetterIndex(seatLetter);
+            case BUSINESS -> flight.getClassCabin(PassengerClass.BUSINESS).getSeatLetterIndex(seatLetter);
+            case TRAVELLER -> flight.getClassCabin(PassengerClass.TRAVELLER).getSeatLetterIndex(seatLetter);
         };
     }
 

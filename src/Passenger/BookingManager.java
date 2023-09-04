@@ -12,6 +12,10 @@ public class BookingManager {
     private List<Booking> bookings = new ArrayList<>();
     private InputLogic logic;
 
+    private Scanner keyboard = new Scanner(System.in);
+
+
+
     public BookingManager(Flight flight) {
         this.flight = flight;
         this.input = new UserInput(this.flight);
@@ -19,38 +23,53 @@ public class BookingManager {
         this.bookings = new ArrayList<>();
     }
     public void newBooking() {
-        // get new passenger information
-        Passenger passenger = new Passenger();
-        Passenger passengerInput = passenger.createPassenger();
-        System.out.println(passenger);
+        while (true) {
+            // get new passenger information - checked and works
+            Passenger passengerInput = new Passenger();
+            passengerInput.createPassenger();
+            passengerInput.getPassengerDetails();
+
+            // get seat number
+            String seatNumber = input.seatNumberInput();
+            // System.out.println("Seat number entered: " + String.valueOf(seatNumber));
+
+            int seatRow = logic.returnSeatRow(seatNumber);
+            //System.out.println("Seat row: " + String.valueOf(seatRow));
+            PassengerClass passengerClass = logic.findSeatClass(seatNumber);
+            //System.out.println("Passenger class: " + String.valueOf(passengerClass));
+            char seatLetter = logic.returnSeatLetter(seatNumber);
+            //System.out.println("Seat letter: " + String.valueOf(seatLetter));
+            int seatLetterIndex = logic.returnSeatLetterRelativeIndex(passengerClass, seatLetter);
+            //System.out.println("Seat letter index from " + String.valueOf(passengerClass) + ": " +String.valueOf(seatLetterIndex));
+            int relativeRow = logic.getRelativeSeatRow(passengerClass, seatRow);
+            //System.out.println("Relative row in " + String.valueOf(passengerClass) + ": " + String.valueOf(relativeRow));
+
+            flight.bookSeat(passengerClass, relativeRow, seatLetterIndex, passengerInput);
+
+            Seat bookedSeat = flight.getClassCabin(passengerClass).seats[relativeRow][seatLetterIndex];
+            bookedSeat.seatInfo();
+
+
+            // input information into a new Booking
+            Booking booking = new Booking(passengerInput, bookedSeat);
+            bookings.add(booking);
+            // output result
+
+            System.out.println("Booking created as follows: ");
+            System.out.println("Passenger first name: " + bookedSeat.getPassenger().getFirstName());
+            System.out.println("Passenger last name: " + bookedSeat.getPassenger().getLastName());
+            System.out.println("Passenger passport number: " + bookedSeat.getPassenger().getPassportNumber());
+            System.out.println("Seat booked: " + bookedSeat.getSeatRow() + bookedSeat.getSeatLetter());
+            System.out.println("Booking reference: " + booking.getBookingID());
 
 
 
-        // get seat number
-        String seatNumber = input.seatNumberInput();
-        int seatRow = logic.returnSeatRow(seatNumber);
-        PassengerClass passengerClass = logic.findSeatClass(seatNumber);
-        char seatLetter = logic.returnSeatLetter(seatNumber);
-        int seatLetterIndex = flight.classSeatLetterIndex(passengerClass, seatLetter);
-        int relativeRow = logic.getRelativeSeatRow(passengerClass, seatRow);
-        flight.bookSeat(passengerClass, relativeRow, seatLetterIndex, passengerInput);
-
-        Seat bookedSeat = flight.travellerClassCabin.seats[relativeRow][seatLetterIndex];
-        bookedSeat.seatInfo();
-
-
-        // input information into a new Booking
-        Booking booking = new Booking(passenger, bookedSeat);
-        bookings.add(booking);
-        // output result
-
-        System.out.println("Booking created as follows: ");
-        System.out.println("Passenger first name: " + bookedSeat.getPassenger().getFirstName());
-        System.out.println("Passenger last name: " + bookedSeat.getPassenger().getLastName());
-        System.out.println("Passenger passport number: " + bookedSeat.getPassenger().getPassportNumber());
-        System.out.println("Seat booked: " + bookedSeat.getSeatRow() + bookedSeat.getSeatLetter());
-        System.out.println("Booking reference: " + booking.getBookingID());
-
+            System.out.println("Would you like to book another seat? (y/n)");
+            char userChoice = keyboard.next().charAt(0);
+            if (userChoice == 'n') {
+                break;
+            }
+        }
 
 
        // String seatInput = input.seatNumberInput();

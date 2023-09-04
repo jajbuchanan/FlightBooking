@@ -30,6 +30,7 @@ public class UserInput {
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input. Enter a valid seat.");
             }
+            System.out.println("Enter a valid seat number.");
         }
     }
 
