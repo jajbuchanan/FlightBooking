@@ -1,24 +1,29 @@
-package Plane;
+package com.flightbooking.model.cabin;
+
+import com.flightbooking.model.plane.Seat;
+import com.flightbooking.model.plane.SeatType;
 
 public abstract class Cabin {
-    protected int startRow;
-    protected int numRows = 10; // Default value
     public char[] seatLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     public Seat[][] seats;
-
+    //
+    // protected int numRows = 10; // Default value
+    protected int startRow;
     public Cabin(int startRow) {
         this.startRow = startRow;
     }
 
-    public abstract   void  printSeatingChgart();
+    public abstract int getNumberOfRows();
+
+    public abstract void printSeatingChart();
     // declare method to initialise seats
 
     public void initializeSeats(String cabinClass) {
 
-        seats = new Seat[numRows][seatLetters.length];
+        seats = new Seat[this.getNumberOfRows()][seatLetters.length];
 
         // set initial values for initialised seats
-        for (int i = 0; i < numRows; i++) {
+        for (int i = 0; i < this.getNumberOfRows(); i++) {
             for (int j = 0; j < seatLetters.length; j++) {
 
                 seats[i][j] = new Seat();
@@ -28,7 +33,7 @@ public abstract class Cabin {
                 // assign seat types based on seat letters
 
                 if (seatLetters[j] == 'A' || seatLetters[j] == 'H') {
-                    seats[i][j].setType((SeatType.WINDOW) );
+                    seats[i][j].setType((SeatType.WINDOW));
                 } else if (cabinClass.equals("business") && (seatLetters[j] == 'C' || seatLetters[j] == 'F')) {
                     seats[i][j].setType(SeatType.MIDDLE);
                 } else if (seatLetters[j] == 'B' || seatLetters[j] == 'F') {
@@ -49,6 +54,10 @@ public abstract class Cabin {
         return seatLetters;
     }
 
+    public void setSeatLetters(char[] seatLetters) {
+        this.seatLetters = seatLetters;
+    }
+
     // iterate through all of the seat letters in the seatLetters array to identify the index in the line
     public int getSeatLetterIndex(char letter) {
         for (int i = 0; i < seatLetters.length; i++) {
@@ -59,17 +68,30 @@ public abstract class Cabin {
         return -1; // return -1 if the seat letter is not found
     }
 
+    // define method to print info for all seats in class
+
     public int getStartRow() {
         return startRow;
     }
 
-    // define method to print info for all seats in class
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
 
     public void cabinSeatInfo() {
-        for (int i = 0; i < numRows; i++) {
+        for (int i = 0; i < this.getNumberOfRows(); i++) {
             for (int j = 0; j < seatLetters.length; j++) {
                 seats[i][j].seatInfo();
             }
         }
     }
+
+    public Seat[][] getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Seat[][] seats) {
+        this.seats = seats;
+    }
+
 }

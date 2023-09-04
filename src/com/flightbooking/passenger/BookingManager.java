@@ -1,10 +1,14 @@
-package Passenger;
-import Display.*;
-import Plane.*;
-import Logic.*;
+package com.flightbooking.passenger;
 
+import com.flightbooking.display.UserInput;
+import com.flightbooking.logic.InputLogic;
+import com.flightbooking.model.plane.Flight;
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.Seat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class BookingManager {
     private Flight flight;
@@ -15,13 +19,13 @@ public class BookingManager {
     private Scanner keyboard = new Scanner(System.in);
 
 
-
     public BookingManager(Flight flight) {
         this.flight = flight;
         this.input = new UserInput(this.flight);
         this.logic = new InputLogic(this.flight);
         this.bookings = new ArrayList<>();
     }
+
     public void newBooking() {
         while (true) {
             // get new passenger information - checked and works
@@ -36,7 +40,7 @@ public class BookingManager {
             int seatRow = logic.returnSeatRow(seatNumber);
             //System.out.println("Seat row: " + String.valueOf(seatRow));
             PassengerClass passengerClass = logic.findSeatClass(seatNumber);
-            //System.out.println("Passenger class: " + String.valueOf(passengerClass));
+            //System.out.println("com.flightbooking.Passenger class: " + String.valueOf(passengerClass));
             char seatLetter = logic.returnSeatLetter(seatNumber);
             //System.out.println("Seat letter: " + String.valueOf(seatLetter));
             int seatLetterIndex = logic.returnSeatLetterRelativeIndex(passengerClass, seatLetter);
@@ -56,12 +60,11 @@ public class BookingManager {
             // output result
 
             System.out.println("Booking created as follows: ");
-            System.out.println("Passenger first name: " + bookedSeat.getPassenger().getFirstName());
-            System.out.println("Passenger last name: " + bookedSeat.getPassenger().getLastName());
-            System.out.println("Passenger passport number: " + bookedSeat.getPassenger().getPassportNumber());
+            System.out.println("com.flightbooking.Passenger first name: " + bookedSeat.getPassenger().getFirstName());
+            System.out.println("com.flightbooking.Passenger last name: " + bookedSeat.getPassenger().getLastName());
+            System.out.println("com.flightbooking.Passenger passport number: " + bookedSeat.getPassenger().getPassportNumber());
             System.out.println("Seat booked: " + bookedSeat.getSeatRow() + bookedSeat.getSeatLetter());
             System.out.println("Booking reference: " + booking.getBookingID());
-
 
 
             System.out.println("Would you like to book another seat? (y/n)");
@@ -72,6 +75,6 @@ public class BookingManager {
         }
 
 
-       // String seatInput = input.seatNumberInput();
+        // String seatInput = input.seatNumberInput();
     }
 }

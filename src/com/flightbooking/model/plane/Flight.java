@@ -1,5 +1,10 @@
-package Plane;
-import Passenger.*;
+package com.flightbooking.model.plane;
+
+import com.flightbooking.model.cabin.BusinessClassCabin;
+import com.flightbooking.model.cabin.Cabin;
+import com.flightbooking.model.cabin.FirstClassCabin;
+import com.flightbooking.model.cabin.TravellerClassCabin;
+import com.flightbooking.passenger.Passenger;
 
 public class Flight {
     private final FirstClassCabin firstClassCabin;
@@ -9,10 +14,10 @@ public class Flight {
     public Flight() {
         this.firstClassCabin = new FirstClassCabin(1);
         this.businessClassCabin = new BusinessClassCabin(
-                firstClassCabin.numRows + 1);
+                firstClassCabin.getNumberOfRows() + 1);
         this.travellerClassCabin = new TravellerClassCabin(
-                firstClassCabin.numRows
-                + businessClassCabin.numRows + 1);
+                firstClassCabin.getNumberOfRows()
+                        + businessClassCabin.getNumberOfRows() + 1);
     }
 
     public void initialize() {
@@ -35,7 +40,7 @@ public class Flight {
     }
 
     // define seat booking functions
-    
+
     public void bookSeat(
             PassengerClass passengerClass,
             int relativeRowNum,
@@ -43,17 +48,17 @@ public class Flight {
             Passenger passenger) {
         switch (passengerClass) {
             case FIRST: {
-               // firstClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
+                // firstClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
                 firstClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
                 break;
             }
             case BUSINESS: {
-              //  businessClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
+                //  businessClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
                 businessClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
                 break;
             }
             case TRAVELLER: {
-             //   travellerClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
+                //   travellerClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
                 travellerClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
                 break;
             }
@@ -63,9 +68,9 @@ public class Flight {
     // define getters for the cabins' numRows
     public int getClassRows(PassengerClass cabinType) {
         return switch (cabinType) {
-            case FIRST -> firstClassCabin.numRows;
-            case BUSINESS -> businessClassCabin.numRows;
-            case TRAVELLER -> travellerClassCabin.numRows;
+            case FIRST -> firstClassCabin.getNumberOfRows();
+            case BUSINESS -> businessClassCabin.getNumberOfRows();
+            case TRAVELLER -> travellerClassCabin.getNumberOfRows();
         };
     }
 
@@ -77,7 +82,6 @@ public class Flight {
             case TRAVELLER -> travellerClassCabin.seatLetters;
         };
     }
-
 
 
     public Seat[][] displayClassSeats(PassengerClass pClass) {
@@ -104,15 +108,15 @@ public class Flight {
         }
     }
 
-    public void printSeatingMap(){
+    public void printSeatingMap() {
 
         System.out.println("printing the seat chart for the entire flight");
 
-       this.firstClassCabin.printSeatingChgart();
+        this.firstClassCabin.printSeatingChart();
 
-        this.businessClassCabin.printSeatingChgart();
+        this.businessClassCabin.printSeatingChart();
 
-        this.travellerClassCabin.printSeatingChgart();
+        this.travellerClassCabin.printSeatingChart();
 
 
     }

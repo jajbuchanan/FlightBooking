@@ -1,6 +1,11 @@
-package Display;
-import Plane.*;
-import java.util.*;
+package com.flightbooking.display;
+
+import com.flightbooking.model.plane.Flight;
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.Seat;
+
+import java.util.Scanner;
+
 public class Display {
     private Flight flight;
     private Scanner keyboard;
@@ -26,7 +31,7 @@ public class Display {
 
     public void printSeatMap(PassengerClass pClass, Seat[][] seats, int startRow) {
         switch (pClass) {
-            case FIRST -> System.out.println("\tA\tD\tE\tH");
+            //      case FIRST ->
             case BUSINESS -> System.out.println("\tA\tC\tD\tE\tF\tH");
             case TRAVELLER -> System.out.println("\tA\tB\tC\tD\tE\tF\tG\tH");
             default -> throw new IllegalArgumentException("Invalid class type: " + pClass);

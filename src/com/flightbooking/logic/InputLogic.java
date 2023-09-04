@@ -1,14 +1,15 @@
-package Logic;
-import Display.*;
-import Passenger.Passenger;
-import Plane.*;
-import java.util.*;
-import Utils.*;
+package com.flightbooking.logic;
+
+import com.flightbooking.model.plane.Flight;
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.utils.Utils;
+
+import java.util.Scanner;
 
 public class InputLogic {
-    private Flight flight;
     Scanner keyboard = new Scanner(System.in);
     Utils utils = new Utils();
+    private Flight flight;
 
     public InputLogic(Flight flight) {
         this.flight = flight;
@@ -27,13 +28,11 @@ public class InputLogic {
             int rowNum) {
         return switch (pClass) {
             case FIRST -> rowNum - 1;
-            case BUSINESS ->
-                    rowNum - flight.getClassRows(PassengerClass.FIRST)
+            case BUSINESS -> rowNum - flight.getClassRows(PassengerClass.FIRST)
                     - 1;
-            case TRAVELLER ->
-                    rowNum - (flight.getClassRows(PassengerClass.FIRST)
-                            + flight.getClassRows(PassengerClass.BUSINESS))
-                            - 1;
+            case TRAVELLER -> rowNum - (flight.getClassRows(PassengerClass.FIRST)
+                    + flight.getClassRows(PassengerClass.BUSINESS))
+                    - 1;
             default -> throw new IllegalArgumentException("Invalid class type: " + pClass);
         };
     }
@@ -80,16 +79,16 @@ public class InputLogic {
             }
             case BUSINESS -> {
                 classRow =
-                    rawRowNum
-                    - flight.getClassRows(PassengerClass.FIRST);
+                        rawRowNum
+                                - flight.getClassRows(PassengerClass.FIRST);
                 yield classRow;
             }
             case TRAVELLER -> {
                 classRow =
-                    rawRowNum
-                    - flight.getClassRows(PassengerClass.FIRST)
-                    - flight.getClassRows(PassengerClass.BUSINESS);
-                    yield classRow;
+                        rawRowNum
+                                - flight.getClassRows(PassengerClass.FIRST)
+                                - flight.getClassRows(PassengerClass.BUSINESS);
+                yield classRow;
             }
         };
     }

@@ -1,8 +1,13 @@
-package Display;
-import java.util.*;
-import Passenger.*;
-import Plane.*;
-import Logic.*;
+package com.flightbooking.display;
+
+import com.flightbooking.logic.InputLogic;
+import com.flightbooking.model.plane.Flight;
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.Seat;
+import com.flightbooking.passenger.Booking;
+import com.flightbooking.passenger.Passenger;
+
+import java.util.Scanner;
 
 public class UserInput {
     Scanner keyboard = new Scanner(System.in);

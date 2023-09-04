@@ -1,5 +1,6 @@
-package Plane;
-import Passenger.*;
+package com.flightbooking.model.plane;
+
+import com.flightbooking.passenger.Passenger;
 
 public class Seat {
     private SeatType type;
@@ -11,7 +12,9 @@ public class Seat {
 
 
     // define a constructor for the class
-    public Seat() { this.isBooked = false; }
+    public Seat() {
+        this.isBooked = false;
+    }
 
     public void seatInfo() {
         System.out.println();
@@ -19,8 +22,8 @@ public class Seat {
         System.out.println("Plane.Seat type: " + type);
         System.out.println("Plane.Seat is booked: " + isBooked);
         if (isBooked) {
-            System.out.println("Passenger.Passenger first name: " + passenger.getFirstName());
-            System.out.println("Passenger.Passenger last name: " + passenger.getLastName());
+            System.out.println("com.flightbooking.Passenger.com.flightbooking.Passenger first name: " + passenger.getFirstName());
+            System.out.println("com.flightbooking.Passenger.com.flightbooking.Passenger last name: " + passenger.getLastName());
             System.out.println("Passport number: " + passenger.getPassportNumber());
         }
     }
@@ -30,12 +33,13 @@ public class Seat {
         passenger = passengerInput;
     }
 
-    public Passenger getPassenger() { return passenger; }
+    public Passenger getPassenger() {
+        return passenger;
+    }
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
-        if (passenger != null)
-        {
+        if (passenger != null) {
             this.isBooked = true;
         } else {
             this.isBooked = false;

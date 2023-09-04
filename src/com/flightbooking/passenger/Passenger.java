@@ -1,17 +1,18 @@
-package Passenger;
-import Plane.*;
-import java.util.*;
+package com.flightbooking.passenger;
+
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.SeatType;
+
+import java.util.Scanner;
 
 public class Passenger {
+    Scanner keyboard = new Scanner(System.in);
     private String firstName;
     private String lastName;
     private String passportNumber;
     private String seatNumber;
-
     private SeatType seatType;
     private PassengerClass passengerClass;
-
-    Scanner keyboard = new Scanner(System.in);
 
     public Passenger() {
         this.firstName = "";
@@ -61,9 +62,9 @@ public class Passenger {
 
 
     public void getPassengerDetails() {
-        System.out.println("Passenger first name: " + getFirstName());
-        System.out.println("Passenger last name: " + getLastName());
-        System.out.println("Passenger passport number: " + getPassportNumber());
+        System.out.println("com.flightbooking.Passenger first name: " + getFirstName());
+        System.out.println("com.flightbooking.Passenger last name: " + getLastName());
+        System.out.println("com.flightbooking.Passenger passport number: " + getPassportNumber());
     }
 
     public String getFirstName() {
