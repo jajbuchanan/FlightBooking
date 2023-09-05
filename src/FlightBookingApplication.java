@@ -2,6 +2,7 @@ import com.flightbooking.display.Display;
 import com.flightbooking.display.UserInput;
 import com.flightbooking.model.plane.Flight;
 import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.Seat;
 import com.flightbooking.passenger.BookingManager;
 import com.flightbooking.passenger.Passenger;
 
@@ -18,25 +19,23 @@ public class FlightBookingApplication {
 
         PassengerClass passengerClass = display.displayClassSeats();
 
-        display.chooseSeatByTypeGivenClass(passengerClass);
-        // bookingManager.newBooking();
+  //this value is coming back null and needs to be fixed in the coe
+        //
+        Seat userSeatSelection =    display.chooseSeatByTypeGivenClass(passengerClass);
 
-
-
-        // pass the flight instance to the UserInterface method
-      //  UserInput input = new UserInput(flight);
-//
-//
-
-
-
-
-
+        System.out.println("seat: +seat");
 
         Passenger passenger = new Passenger();
 
         passenger.createPassenger();
 
+ //= flight.fetchSeat(passengerClass,)
+        System.out.println("reserving seat: +seat");
+        System.out.println("seat: +seat");
+        userSeatSelection.setPassenger(passenger);
+        userSeatSelection.setBooked(true);
+
+        System.out.println("seat: +seat");
         if (true) System.exit(0);   //
 
 

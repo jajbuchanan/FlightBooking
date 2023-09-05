@@ -39,7 +39,7 @@ public class BookingManager {
 
             int seatRow = logic.returnSeatRow(seatNumber);
             //System.out.println("Seat row: " + String.valueOf(seatRow));
-            PassengerClass passengerClass = logic.findSeatClass(seatNumber);
+            PassengerClass passengerClass = logic.lookupSeatClassBySpecificSeat(seatNumber);
             //System.out.println("com.flightbooking.Passenger class: " + String.valueOf(passengerClass));
             char seatLetter = logic.returnSeatLetter(seatNumber);
             //System.out.println("Seat letter: " + String.valueOf(seatLetter));

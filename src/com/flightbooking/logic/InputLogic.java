@@ -42,11 +42,11 @@ public class InputLogic {
         String input;
         System.out.println("Enter a seat number: (e.g. 15B) ");
         input = keyboard.next();
-        return findSeatClass(input);
+        return lookupSeatClassBySpecificSeat(input);
     }
 
     // Method to determine cabin class from user input
-    public PassengerClass findSeatClass(String seatInput) {
+    public PassengerClass lookupSeatClassBySpecificSeat(String seatInput) {
         int rowNum = Integer.parseInt(seatInput.substring(
                 0, seatInput.length() - 1));
         if (rowNum <= flight.getClassRows(PassengerClass.FIRST)) {
@@ -66,7 +66,10 @@ public class InputLogic {
         }
     }
 
-    public int findClassRow(
+    // seatValidator || lookupseatclassbyspecificseat || calculaterelativerowinclass
+    // String seatInput --> validated by seatValidator --> lookupseatclassbyspecificseat --> calculaterelativerowinclass
+
+    public int calculateRelativeRowInClass(
             PassengerClass passengerClass,
             String seatInput) {
         int classRow;
@@ -106,7 +109,7 @@ public class InputLogic {
     public boolean seatValidator(String seatNum) {
         int num = returnSeatRow(seatNum);
         char letter = returnSeatLetter(seatNum);
-        PassengerClass seatClass = findSeatClass(seatNum);
+        PassengerClass seatClass = lookupSeatClassBySpecificSeat(seatNum);
         int numRows;
         char[] rowLetters;
         switch (seatClass) {

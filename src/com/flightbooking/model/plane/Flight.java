@@ -147,9 +147,6 @@ public class Flight {
 
         System.out.println(" enter ::  isSeatAvailable()");
 
-
-//boolean isAvailable =
-
         int rowNumber= Integer.parseInt(seatSelection.replaceAll("[A-Z]+",""));//
         char seatLetter= seatSelection.replaceAll("[0-9]+","").charAt(0);
 
@@ -161,20 +158,23 @@ public class Flight {
         System.out.println("specificSeat: " + specificSeat);
 
         return specificSeat.isAvailable();
-/*
-    System.out.println("seat nuumber selection: "+split);
-        switch (passengerClass) {
-            case FIRST -> firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-            case BUSINESS -> businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-            case TRAVELLER -> travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-        }
 
-        System.out.println("checking isf this seat is available: " + seat);
-
-
-        this.*/
-//return false;
     }
+    public Seat  fetchSeat(PassengerClass passengerClass, String seatSelection){
 
-    //public boolean bookAny
+        System.out.println(" enter ::  fetchSeat()");
+
+        int rowNumber= Integer.parseInt(seatSelection.replaceAll("[A-Z]+",""));//
+        char seatLetter= seatSelection.replaceAll("[0-9]+","").charAt(0);
+
+        System.out.println("rowNumber: " + rowNumber);
+
+        System.out.println("seatLetter: " + seatLetter);
+
+        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass,rowNumber,seatLetter);
+        System.out.println("specificSeat: " + specificSeat);
+
+        return specificSeat;
+
+    }
 }
