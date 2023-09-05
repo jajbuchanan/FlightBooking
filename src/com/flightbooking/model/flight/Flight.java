@@ -9,6 +9,7 @@ import com.flightbooking.model.plane.Seat;
 import com.flightbooking.model.plane.SeatType;
 import com.flightbooking.trash.passenger.Passenger;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Flight {
@@ -384,5 +385,77 @@ private Scanner keyboard = new Scanner(System.in);
             return null;
         }
     }
+public Seat cancelFlight(String passortNumber) {
 
+    System.out.println("cancelFlight // enter ");
+
+    System.out.println("deleting a reserveration w/ passort number" + passortNumber);
+
+    Seat foundSeat = null;
+
+    for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
+        for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
+
+            Seat seat = this.firstClassCabin.seats[row][seatIndex];
+            System.out.println("checking: "+seat);
+
+            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+
+                System.out.println("found seat matching passport;");
+
+                seat.setBooked(false);
+                seat.setPassenger(null);
+
+                foundSeat = seat;
+            }
+
+        }
+    }
+
+    for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
+        for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
+
+            Seat seat = this.businessClassCabin.seats[row][seatIndex];
+            System.out.println("checking: "+seat);
+
+            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+
+                System.out.println("eat.isBooked(): "+seat.isBooked());
+
+
+                System.out.println("seat.getPassenger().getPassportNumber(): "+seat.getPassenger().getPassportNumber());
+                System.out.println("passortNumber"+seat);
+
+                System.out.println("found seat matching passport;");
+
+                seat.setBooked(false);
+                seat.setPassenger(null);
+
+                foundSeat = seat;
+            }
+
+        }
+    }
+
+    for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
+        for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
+
+            Seat seat = this.travellerClassCabin.seats[row][seatIndex];
+            System.out.println("checking: "+seat);
+            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+
+                System.out.println("found seat matching passport;");
+
+                seat.setBooked(false);
+                seat.setPassenger(null);
+
+                foundSeat = seat;
+            }
+
+        }
+    }
+
+    System.out.println("found seat that was deleted:"+foundSeat);
+    return foundSeat;
+}
 }

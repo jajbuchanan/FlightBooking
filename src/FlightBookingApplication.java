@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class FlightBookingApplication {
     private static  Scanner keyboard = new Scanner(System.in);
 
+  private static   Flight flight = new Flight();
+    //flight.initializePlaneCabins();
+
     public static void printMen(){
 
         while(true) {
@@ -22,6 +25,14 @@ public class FlightBookingApplication {
 
             if (menuSelection == 1) {
                 createFlightBookingSingle();
+            }else   if (menuSelection == 5) {
+
+System.out.println("cancel fligth screen...");
+                System.out.println("enter passport num...");
+                 String passportNum = keyboard.next();
+                System.out.println("passportNum " + passportNum);
+
+                flight.cancelFlight(passportNum);
             } else if (menuSelection == 9) {
                 System.out.println("bye");
 System.exit(0);
@@ -39,8 +50,6 @@ System.exit(0);
 
         System.out.println("welcome to the single flight booking");
 
-        Flight flight = new Flight();
-//flight.initializePlaneCabins();
 
         PassengerClass passengerClass = flight.promptUserToSelectCabin();
     System.out.println("passengerClass "+ passengerClass);
