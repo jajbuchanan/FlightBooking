@@ -29,17 +29,6 @@ public class Flight {
         travellerClassCabin.initializeSeats("traveller");
     }
 
-    // print all cabin information
-    public void printAllCabins() {
-        System.out.println("First Class Cabin:");
-        firstClassCabin.cabinSeatInfo();
-
-        System.out.println("\nBusiness Class Cabin:");
-        businessClassCabin.cabinSeatInfo();
-
-        System.out.println("\nTraveller Class Cabin:");
-        travellerClassCabin.cabinSeatInfo();
-    }
 
     // define seat booking functions
 
@@ -92,7 +81,6 @@ public class Flight {
             case BUSINESS -> this.businessClassCabin.printSeatingChart();
             case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
         }
-        ;
     }
 
     private void displayseatsbytypebyclass(PassengerClass pClass,

@@ -19,7 +19,7 @@ public class FlightBookingApplication {
 
         PassengerClass passengerClass = display.displayClassSeats();
 
-  //this value is coming back null and needs to be fixed in the coe
+  //this value is coming back null and needs to be fixed in the code
         //
         Seat userSeatSelection =    display.chooseSeatByTypeGivenClass(passengerClass);
 
