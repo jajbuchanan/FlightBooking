@@ -65,7 +65,7 @@ public class Flight {
 
         try {
 //
-            System.out.println("chosenClass: " + passengerClass);
+            System.out.println("passengerClass: " + passengerClass);
 
 
             System.out.println(" Enter the choice of seat type (window, standard, aisle) or seat number: ");
@@ -74,7 +74,7 @@ public class Flight {
 
             System.out.println("userSeatSelection: " + userSeatSelection);
 
-            boolean isIndividualSeatAvailable = isSpecificSeatAvailable(passengerClass, userSeatSelection);
+            boolean isIndividualSeatAvailable =this. isSpecificSeatAvailable(passengerClass, userSeatSelection);
 
             System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
 
@@ -94,8 +94,8 @@ public class Flight {
                 System.out.println("returned seat: " + seat);
 
                 isIndividualSeatAvailable = seat.isAvailable();
-            }
 
+            }
 
             System.out.println("user seat choice " + userSeatSelection);
 
@@ -138,9 +138,28 @@ public class Flight {
 
         System.out.println("rowNumber: " + rowNumber);
 
+
+        int logicalSeatRow=-1;
+
+
+        System.out.println("raw this.firstClassCabin.logicalRowNumberOffset: " + this.firstClassCabin.logicalRowNumberOffset);
+        System.out.println("raw this.businessClassCabin.logicalRowNumberOffset;: " +this.businessClassCabin.logicalRowNumberOffset);
+
+        System.out.println("raw this.travellerClassCabin.logicalRowNumberOffse: " +this.travellerClassCabin.logicalRowNumberOffset);
+
+        switch (passengerClass) {
+            case FIRST ->logicalSeatRow=rowNumber- this.firstClassCabin.logicalRowNumberOffset;
+            case BUSINESS ->logicalSeatRow=rowNumber- this.businessClassCabin.logicalRowNumberOffset;
+            case TRAVELLER -> logicalSeatRow=rowNumber- this.travellerClassCabin.logicalRowNumberOffset;
+        }
+
+    //    logicalSeatRow = rowNumber;
+        System.out.println("logicalSeatRow: " + logicalSeatRow);
+
         System.out.println("seatLetter: " + seatLetter);
 
-        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass, rowNumber, seatLetter);
+        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass, logicalSeatRow, seatLetter);
+       // tr
         System.out.println("specificSeat fetchSeatByClassRowAndLetter: " + specificSeat);
 
         return specificSeat;
@@ -150,6 +169,10 @@ public class Flight {
     public Seat fetchSeatByClassRowAndLetter(PassengerClass passengerClass, int logicalSeatRow, char seatLetter) {
         System.out.println("enter // fetchSeatByClassRowAndLetter");
 
+
+
+        System.out.println("logicalSeatRow!!!: " + logicalSeatRow);
+
         switch (passengerClass) {
 
             case FIRST:
@@ -157,21 +180,60 @@ public class Flight {
                 System.out.println("here");
 
 
-                int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
+     //           int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
 
-                System.out.println("logicalSeatRow: " + logicalSeatRow);
+            //    System.out.println("logicalSeatRow: " + logicalSeatRow);
 
-                System.out.println("adjustedRow" + adjustedRow);
+            //    System.out.println("adjustedRow" + adjustedRow);
 
                 //    for(){
 
                 //    }
-                Seat seat = firstClassCabin.seats[adjustedRow][firstClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
+                Seat seat = firstClassCabin.seats[logicalSeatRow][firstClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
+
+                System.out.println("seat from the fetch" + seat);
+
+                return seat;
+            case BUSINESS:
+
+                System.out.println("BUSINESS BUSINESS BUSINESS");
+
+                System.out.println("logicalSeatRow!!!: " + logicalSeatRow);
+
+                //           int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
+
+                //    System.out.println("logicalSeatRow: " + logicalSeatRow);
+
+                //    System.out.println("adjustedRow" + adjustedRow);
+
+                //    for(){
+
+                //    }
+                 seat = this.businessClassCabin.seats[logicalSeatRow][businessClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
 
                 System.out.println("seat from the fetch" + seat);
 
                 return seat;
 
+            case TRAVELLER:
+
+                System.out.println("TRAVELLER TRAVELLER TRAVELLER");
+
+
+                //           int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
+
+                //    System.out.println("logicalSeatRow: " + logicalSeatRow);
+
+                //    System.out.println("adjustedRow" + adjustedRow);
+
+                //    for(){
+
+                //    }
+                seat = this.travellerClassCabin.seats[logicalSeatRow][travellerClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
+
+                System.out.println("seat from the fetch" + seat);
+
+                return seat;
             //].seatInfo();
             //> firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
 
@@ -271,11 +333,27 @@ public class Flight {
         int rowNumber = Integer.parseInt(seatSelection.replaceAll("[A-Z]+", ""));//
         char seatLetter = seatSelection.replaceAll("[0-9]+", "").charAt(0);
 
-        System.out.println("rowNumber: " + rowNumber);
+        System.out.println("raw rowNumber: " + rowNumber);
+
+        int adjustedrownum=-1;
+
+
+        System.out.println("raw this.firstClassCabin.logicalRowNumberOffset: " + this.firstClassCabin.logicalRowNumberOffset);
+        System.out.println("raw this.businessClassCabin.logicalRowNumberOffset;: " +this.businessClassCabin.logicalRowNumberOffset);
+
+        System.out.println("raw this.travellerClassCabin.logicalRowNumberOffse: " +this.travellerClassCabin.logicalRowNumberOffset);
+
+        switch (passengerClass) {
+            case FIRST ->adjustedrownum=rowNumber- this.firstClassCabin.logicalRowNumberOffset;
+            case BUSINESS ->adjustedrownum=rowNumber- this.businessClassCabin.logicalRowNumberOffset;
+            case TRAVELLER -> adjustedrownum=rowNumber- this.travellerClassCabin.logicalRowNumberOffset;
+        }
+
+        System.out.println("adjustedrownum: " + adjustedrownum);
 
         System.out.println("seatLetter: " + seatLetter);
 
-        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass, rowNumber, seatLetter);
+        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass, adjustedrownum, seatLetter);
         System.out.println("specificSeat: " + specificSeat);
 
         return specificSeat.isAvailable();
