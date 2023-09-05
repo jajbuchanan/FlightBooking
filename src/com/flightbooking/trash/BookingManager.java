@@ -1,7 +1,7 @@
-package com.flightbooking.passenger;
-
-import com.flightbooking.display.UserInput;
-import com.flightbooking.logic.InputLogic;
+package com.flightbooking.trash;
+/*
+import com.flightbooking.trash.passenger.Booking;
+import com.flightbooking.trash.passenger.Passenger;
 import com.flightbooking.model.plane.Flight;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
@@ -78,3 +78,4 @@ public class BookingManager {
         // String seatInput = input.seatNumberInput();
     }
 }
+*/

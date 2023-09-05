@@ -1,10 +1,13 @@
-package com.flightbooking.model.plane;
+package com.flightbooking.model.flight;
 
 import com.flightbooking.model.cabin.BusinessClassCabin;
 import com.flightbooking.model.cabin.Cabin;
 import com.flightbooking.model.cabin.FirstClassCabin;
 import com.flightbooking.model.cabin.TravellerClassCabin;
-import com.flightbooking.passenger.Passenger;
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.Seat;
+import com.flightbooking.model.plane.SeatType;
+import com.flightbooking.trash.passenger.Passenger;
 
 import java.util.Scanner;
 
@@ -262,6 +265,27 @@ return seat;
         return specificSeat.isAvailable();
 
     }
+    public PassengerClass promptUserToSeletCabin() {
+        System.out.println("Enter the cabin class (First, Business, Traveller): ");
+        String classChoice = keyboard.next().toUpperCase();
+        System.out.println("choice" + classChoice);
 
+        try {
+
+            PassengerClass chosenClass = PassengerClass.valueOf(classChoice);
+
+            System.out.println("chosenClass: " + chosenClass);
+
+            this.displayClassSeats(chosenClass);
+
+            return chosenClass;
+            //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(classChoice));
+            //       int startRow = flight.getClassCabin(chosenClass).getStartRow();
+            //    printSeatMap(chosenClass, seats, startRow);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input. Please enter a valid class.");
+            return null;
+        }
+    }
 
 }

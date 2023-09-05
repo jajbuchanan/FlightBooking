@@ -1,25 +1,16 @@
-import com.flightbooking.display.Display;
-import com.flightbooking.model.plane.Flight;
+import com.flightbooking.model.flight.Flight;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
-import com.flightbooking.passenger.BookingManager;
-import com.flightbooking.passenger.Passenger;
+import com.flightbooking.trash.passenger.Passenger;
 
 public class FlightBookingApplication {
     public static void main(String[] args) {
 
         Flight flight = new Flight();
         flight.initialize();
-        //flight.printSeatingMap();
 
-        //
+        PassengerClass passengerClass = flight.promptUserToSeletCabin();
 
-        Display display = new Display(flight);
-
-        PassengerClass passengerClass = display.promptUserToSeletCabin();
-
-  //this value is coming back null and needs to be fixed in the code
-        //
         Seat userSeatSelection =    flight.chooseSeatByTypeGivenClass(passengerClass);
 
         System.out.println("userSeatSelection: "+userSeatSelection);
@@ -50,7 +41,7 @@ flight.displayClassSeats();
 
         //   --      display.printSeatMap(PassengerClass.FIRST);
 
-        BookingManager bookingManager = new BookingManager(flight);
+      //  BookingManager bookingManager = new BookingManager(flight);
 
 
     }

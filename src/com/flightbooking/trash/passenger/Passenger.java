@@ -1,4 +1,4 @@
-package com.flightbooking.passenger;
+package com.flightbooking.trash.passenger;
 
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.SeatType;

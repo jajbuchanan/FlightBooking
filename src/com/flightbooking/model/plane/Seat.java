@@ -1,6 +1,6 @@
 package com.flightbooking.model.plane;
 
-import com.flightbooking.passenger.Passenger;
+import com.flightbooking.trash.passenger.Passenger;
 
 public class Seat {
     private SeatType type;

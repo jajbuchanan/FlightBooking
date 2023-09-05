@@ -1,5 +1,5 @@
-package com.flightbooking.logic;
-
+package com.flightbooking.trash;
+/*
 import com.flightbooking.model.plane.Flight;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.utils.Utils;
@@ -138,3 +138,4 @@ public class InputLogic {
     }
 
 }
+*/

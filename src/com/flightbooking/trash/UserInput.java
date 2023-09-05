@@ -1,11 +1,12 @@
-package com.flightbooking.display;
+/*
+package com.flightbooking.trash;
 
-import com.flightbooking.logic.InputLogic;
 import com.flightbooking.model.plane.Flight;
+
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
-import com.flightbooking.passenger.Booking;
-import com.flightbooking.passenger.Passenger;
+import com.flightbooking.trash.passenger.Booking;
+import com.flightbooking.trash.passenger.Passenger;
 
 import java.util.Scanner;
 
@@ -72,3 +73,4 @@ public class UserInput {
 
 
 }
+*/
