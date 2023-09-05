@@ -3,14 +3,47 @@ import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
 import com.flightbooking.trash.passenger.Passenger;
 
+import java.util.Scanner;
+
 public class FlightBookingApplication {
+    private static  Scanner keyboard = new Scanner(System.in);
+
+    public static void printMen(){
+
+        while(true) {
+
+            System.out.println("reserve booking (single)       1");
+            System.out.println("reserve booking (mult) [BROKNE]      2");
+            System.out.println("cancel booking      5");
+            System.out.println("exit booking   app   9");
+
+            int menuSelection = Integer.parseInt(keyboard.next());
+            System.out.println("menuSelection " + menuSelection);
+
+            if (menuSelection == 1) {
+                createFlightBookingSingle();
+            } else if (menuSelection == 9) {
+                System.out.println("bye");
+System.exit(0);
+          }
+
+        }
+    }
     public static void main(String[] args) {
+
+        printMen();
+
+    }
+
+    public static void createFlightBookingSingle(){
+
+        System.out.println("welcome to the single flight booking");
 
         Flight flight = new Flight();
 //flight.initializePlaneCabins();
 
         PassengerClass passengerClass = flight.promptUserToSelectCabin();
-System.out.println("passengerClass "+ passengerClass);
+    System.out.println("passengerClass "+ passengerClass);
 
         flight.printSeatingChart(passengerClass);
 
@@ -39,7 +72,7 @@ System.out.println("passengerClass "+ passengerClass);
 
         //first
         // System.out.println("seat: +seat");
-        if (true) System.exit(0);   //
+    //    if (true) System.exit(0);   //
 
 
         //   --      display.printSeatMap(PassengerClass.FIRST);

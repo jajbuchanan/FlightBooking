@@ -16,7 +16,7 @@ public class Flight {
     private final FirstClassCabin firstClassCabin;
     private final BusinessClassCabin businessClassCabin;
     private final TravellerClassCabin travellerClassCabin;
-    private Scanner keyboard = new Scanner(System.in);
+private Scanner keyboard = new Scanner(System.in);
 
     public Flight() {
 
