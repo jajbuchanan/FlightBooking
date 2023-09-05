@@ -87,11 +87,8 @@ public class Seat {
     }
 
     public void setSeatNumber(int seatRow, char seatLetter) {
-        this.seatNumber = String.valueOf(seatRow + seatLetter);
+        this.seatNumber = String.valueOf(seatRow) + seatLetter;
     }
-
-// define seat booking method
-
 
     @Override
     public String toString() {

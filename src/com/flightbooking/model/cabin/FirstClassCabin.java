@@ -5,9 +5,7 @@ import com.flightbooking.model.plane.SeatType;
 
 public class FirstClassCabin extends Cabin {
 
-
-
-    public int getNumberOfRows() {
+    @Override public int getNumberOfRows() {
         return 3;
     }
 
@@ -18,7 +16,7 @@ public class FirstClassCabin extends Cabin {
 
         for (int rowNumber = 0; rowNumber < this.getNumberOfRows(); rowNumber++) {
             //     System.out.print(startRow + rowNumber + "\t");
-            System.out.print(rowNumber + "\t");
+            System.out.print((rowNumber+this.logicalRowNumberOffset) + "\t");
 
             for (Seat seat : this.seats[rowNumber]) {
                 if (seat.isBooked()) {
@@ -45,7 +43,7 @@ public class FirstClassCabin extends Cabin {
 
         for (int rowNumber = 0; rowNumber < this.getNumberOfRows(); rowNumber++) {
             //System.out.print(startRow + rowNumber + "\t");
-            System.out.print(rowNumber + "\t");
+            System.out.print((rowNumber+this.logicalRowNumberOffset) + "\t");
 
             for (Seat seat : this.seats[rowNumber]) {
 
@@ -58,6 +56,37 @@ public class FirstClassCabin extends Cabin {
             }
             System.out.println();
             System.out.println();
+        }
+    }
+
+    @Override
+    public void initializeSeats() {
+
+        this.seats = new Seat[this.getNumberOfRows()][this.getSeatLetters().length];
+
+        // set initial values for initialised seats
+
+        for (int cabinRowNumber = 0; cabinRowNumber < this.getNumberOfRows(); cabinRowNumber++) {
+
+            for (int cabinRowSeatNumber = 0; cabinRowSeatNumber < this.getSeatLetters().length; cabinRowSeatNumber++) {
+
+                char cabinRowSeatLetter = this.getSeatLetters()[cabinRowSeatNumber];
+
+                Seat newSeat = new Seat();
+
+                newSeat.setSeatRow(cabinRowNumber);
+                newSeat.setSeatLetter(cabinRowSeatLetter);
+                newSeat.setSeatNumber(cabinRowNumber, cabinRowSeatLetter);
+
+
+                if (cabinRowSeatLetter == 'A' || cabinRowSeatLetter == 'H') {
+                    newSeat.setType((SeatType.WINDOW));
+                } else {
+                    newSeat.setType(SeatType.AISLE);
+                }
+
+                seats[cabinRowNumber][cabinRowSeatNumber] = newSeat;
+            }
         }
     }
 }

@@ -7,9 +7,12 @@ public class FlightBookingApplication {
     public static void main(String[] args) {
 
         Flight flight = new Flight();
-        flight.initialize();
+//flight.initializePlaneCabins();
 
-        PassengerClass passengerClass = flight.promptUserToSeletCabin();
+        PassengerClass passengerClass = flight.promptUserToSelectCabin();
+System.out.println("passengerClass "+ passengerClass);
+
+        flight.printSeatingChart(passengerClass);
 
         Seat userSeatSelection = flight.chooseSeatByTypeGivenClass(passengerClass);
 
@@ -32,7 +35,7 @@ public class FlightBookingApplication {
         System.out.println("seat after register  " + userSeatSelection);
 
         System.out.println("seat map");
-        flight.displayClassSeats();
+        flight.printSeatingChart();
 
         //first
         // System.out.println("seat: +seat");

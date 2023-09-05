@@ -19,27 +19,38 @@ public class Flight {
     private Scanner keyboard = new Scanner(System.in);
 
     public Flight() {
+
         this.firstClassCabin = new FirstClassCabin();
+        this.firstClassCabin.setLogicalRowNumberOffset(1);
+        this.firstClassCabin.initializeSeats();
+
         this.businessClassCabin = new BusinessClassCabin();
+
+        this.businessClassCabin.setLogicalRowNumberOffset(
+                        this.firstClassCabin.getLogicalRowNumberOffset()+
+                     this.firstClassCabin.getNumberOfRows());
+
+        this.businessClassCabin.initializeSeats();
+
         this.travellerClassCabin = new TravellerClassCabin();
+        this.travellerClassCabin.setLogicalRowNumberOffset(
+                this.businessClassCabin.getLogicalRowNumberOffset()+
+                        this.businessClassCabin.getNumberOfRows());
+        this.travellerClassCabin.initializeSeats();
+      //  this.travellerClassCabin.setLogicalRowNumberOffset(this.firstClassCabin.getNumberOfRows() + this.businessClassCabin.getNumberOfRows());
     }
 
-    public void initialize() {
-        // initialise all cabins
-        firstClassCabin.initializeSeats("first");
-        businessClassCabin.initializeSeats("business");
-        travellerClassCabin.initializeSeats("traveller");
-    }
 
-    public void displayClassSeats() {
+
+    public void printSeatingChart() {
         this.firstClassCabin.printSeatingChart();
         this.businessClassCabin.printSeatingChart();
         this.travellerClassCabin.printSeatingChart();
 
     }
 
-    public void displayClassSeats(PassengerClass pClass) {
-        switch (pClass) {
+    public void printSeatingChart(PassengerClass passengerClass) {
+        switch (passengerClass) {
             case FIRST -> this.firstClassCabin.printSeatingChart();
             case BUSINESS -> this.businessClassCabin.printSeatingChart();
             case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
@@ -136,7 +147,7 @@ public class Flight {
 
     }
 
-    public Seat fetchSeatByClassRowAndLetter(PassengerClass passengerClass, int seatRow, char seatLetter) {
+    public Seat fetchSeatByClassRowAndLetter(PassengerClass passengerClass, int logicalSeatRow, char seatLetter) {
         System.out.println("enter // fetchSeatByClassRowAndLetter");
 
         switch (passengerClass) {
@@ -145,10 +156,20 @@ public class Flight {
 
                 System.out.println("here");
 
-                Seat seat =
-                        firstClassCabin.seats[seatRow][firstClassCabin.getSeatLetterIndex(seatLetter)];
+
+                int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
+
+                System.out.println("logicalSeatRow: " + logicalSeatRow);
+
+                System.out.println("adjustedRow" + adjustedRow);
+
+                //    for(){
+
+                //    }
+                Seat seat = firstClassCabin.seats[adjustedRow][firstClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
 
                 System.out.println("seat from the fetch" + seat);
+
                 return seat;
 
             //].seatInfo();
@@ -261,9 +282,12 @@ public class Flight {
 
     }
 
-    public PassengerClass promptUserToSeletCabin() {
+    public PassengerClass promptUserToSelectCabin() {
+
         System.out.println("Enter the cabin class (First, Business, Traveller): ");
+
         String classChoice = keyboard.next().toUpperCase();
+
         System.out.println("choice" + classChoice);
 
         try {
@@ -272,7 +296,6 @@ public class Flight {
 
             System.out.println("chosenClass: " + chosenClass);
 
-            this.displayClassSeats(chosenClass);
 
             return chosenClass;
             //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(classChoice));
