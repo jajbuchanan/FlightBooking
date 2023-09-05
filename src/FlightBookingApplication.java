@@ -14,16 +14,27 @@ public class FlightBookingApplication {
     public static void printMen(){
 
         while(true) {
+            System.out.println("******************************************************************");
+            System.out.println();
 
+            System.out.println("display plane seating chart     0");
             System.out.println("reserve booking (single)       1");
             System.out.println("reserve booking (mult) [BROKNE]      2");
             System.out.println("find booking by passport num booking      4");System.out.println("cancel booking  by passport    5");
             System.out.println("exit booking   app   9");
+            System.out.println();
+            System.out.println("******************************************************************");
+
+            System.out.println();
+            System.out.print("enter your menu selection: ");
 
             int menuSelection = Integer.parseInt(keyboard.next());
             System.out.println("menuSelection " + menuSelection);
 
-            if (menuSelection == 1) {
+            if (menuSelection ==0) {
+flight.printSeatingChart();
+
+            }else            if (menuSelection == 1) {
                 createFlightBookingSingle();
             }else   if (menuSelection == 4) {
 
