@@ -22,7 +22,7 @@ public class FlightBookingApplication {
             System.out.println("reserve booking (mult) [BROKNE]      2");
             System.out.println("find booking by passport num booking      4");
             System.out.println("find booking by last name      5");
-
+            System.out.println("calculate total flight revenueme      6");
 
             System.out.println("cancel booking  by passport    8");
             System.out.println("exit booking   app   9");
@@ -60,7 +60,18 @@ flight.printSeatingChart();
 
                     flight.displayPassengerInfoByPassengerLastName(lastName);
 
-                }else   if (menuSelection == 8) {
+            } else if (menuSelection == 6) {
+
+                System.out.println("calulating revenue from lanae reserverationn...");
+
+                //      System.out.println("enter last name...");
+
+                //      String lastName = keyboard.next();
+                //     System.out.println("lastName " + lastName);
+
+                flight.calculateRevenueFromReservations();
+
+            } else if (menuSelection == 8) {
 
 System.out.println("cancel fligth screen...");
                 System.out.println("enter passport num...");

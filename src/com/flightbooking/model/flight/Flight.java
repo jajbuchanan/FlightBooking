@@ -653,4 +653,71 @@ public Seat cancelFlight(String passortNumber) {
 
             return foundSeat;
         }
+
+    public void calculateRevenueFromReservations() {
+        //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
+
+        //   System.out.println("calculateRevenueFromReservations // enter ");
+
+        int firstClassCounter = 0;
+        int businesslassCounter = 0;
+        int travellerClassCounter = 0;
+
+        for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.firstClassCabin.seats[row][seatIndex];
+
+                if (seat.isBooked()) {
+
+                    System.out.println("found booked seat");
+
+                    firstClassCounter++;
+
+                }
+
+            }
+        }
+
+        for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.businessClassCabin.seats[row][seatIndex];
+
+                if (seat.isBooked()) {
+
+                    System.out.println("found booked seat");
+
+                    businesslassCounter++;
+
+                }
+
+            }
+        }
+
+        for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.travellerClassCabin.seats[row][seatIndex];
+
+                if (seat.isBooked()) {
+
+                    System.out.println("found booked seat");
+
+                    travellerClassCounter++;
+
+                }
+
+            }
+        }
+
+        System.out.println();
+        System.out.println("Class\t\tPrice");
+        System.out.println("Traveller\t" + travellerClassCounter * 1000);
+        System.out.println("Business\t\t" + businesslassCounter * 1200);
+        System.out.println("First\t\t" + firstClassCounter * 1800);
+        System.out.println();
+
+
+    }
 }
