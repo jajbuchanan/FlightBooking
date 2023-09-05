@@ -17,7 +17,7 @@ public class FlightBookingApplication {
 
             System.out.println("reserve booking (single)       1");
             System.out.println("reserve booking (mult) [BROKNE]      2");
-            System.out.println("cancel booking      5");
+            System.out.println("find booking by passport num booking      4");System.out.println("cancel booking  by passport    5");
             System.out.println("exit booking   app   9");
 
             int menuSelection = Integer.parseInt(keyboard.next());
@@ -25,7 +25,16 @@ public class FlightBookingApplication {
 
             if (menuSelection == 1) {
                 createFlightBookingSingle();
-            }else   if (menuSelection == 5) {
+            }else   if (menuSelection == 4) {
+
+                System.out.println("find reserveation infoen...");
+                System.out.println("enter passport num...");
+                String passportNum = keyboard.next();
+                System.out.println("passportNum " + passportNum);
+
+                flight.displayPassengerInfoByPasspoerNumber(passportNum);
+
+              }else   if (menuSelection == 5) {
 
 System.out.println("cancel fligth screen...");
                 System.out.println("enter passport num...");

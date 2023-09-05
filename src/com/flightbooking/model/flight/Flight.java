@@ -458,4 +458,94 @@ public Seat cancelFlight(String passortNumber) {
     System.out.println("found seat that was deleted:"+foundSeat);
     return foundSeat;
 }
+
+    public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
+
+        System.out.println("displayPassengerInfoByPasspoerNumber // enter ");
+
+        System.out.println("displayPassengerInfoByPasspoerNumber a reserveration w/ passort number" + passortNumber);
+
+        Seat foundSeat = null;
+
+        for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.firstClassCabin.seats[row][seatIndex];
+                System.out.println("checking: "+seat);
+
+                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+
+                    System.out.println("found seat matching passport;");
+
+            //        seat.setBooked(false);
+              //      seat.setPassenger(null);
+
+                    foundSeat = seat;
+                }
+
+            }
+        }
+
+        for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.businessClassCabin.seats[row][seatIndex];
+                System.out.println("checking: "+seat);
+
+                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+
+                    System.out.println("eat.isBooked(): "+seat.isBooked());
+
+
+                    System.out.println("seat.getPassenger().getPassportNumber(): "+seat.getPassenger().getPassportNumber());
+                    System.out.println("passortNumber"+seat);
+
+                    System.out.println("found seat matching passport;");
+
+               //     seat.setBooked(false);
+               //     seat.setPassenger(null);
+
+                    foundSeat = seat;
+                }
+
+            }
+        }
+
+        for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.travellerClassCabin.seats[row][seatIndex];
+                System.out.println("checking: "+seat);
+                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+
+                    System.out.println("found seat matching passport;");
+
+               //     seat.setBooked(false);
+               //     seat.setPassenger(null);
+
+                    foundSeat = seat;
+                }
+
+            }
+        }
+
+        System.out.println("found seat that was deleted:"+foundSeat);
+
+        System.out.println("First name\tLast name\tPassport number\tSeat reserved\tClass\tType");
+//First name	Last name	Passport number	Seat reserved	Class	Type
+//Akram	Khan	JJO3412	24A	Traveller	Window
+        System.out.print(foundSeat.getPassenger().getFirstName());
+        System.out.print("\t");
+        System.out.print(foundSeat.getPassenger().getLastName());
+        System.out.print("\t");
+        System.out.print(foundSeat.getPassenger().getPassportNumber());System.out.print("\t");
+        System.out.print(foundSeat.getSeatNumber());System.out.print("\t");
+                System.out.println(foundSeat.getType());System.out.print("\t");
+
+
+
+
+
+        return foundSeat;
+    }
 }
