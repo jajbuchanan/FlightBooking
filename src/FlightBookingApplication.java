@@ -68,47 +68,56 @@ System.exit(0);
 
     public static void createFlightBookingSingle(){
 
-        System.out.println("welcome to the single flight booking");
+     //   System.out.println("welcome to the single flight booking");
+boolean doWork=true;
+        while (doWork) {
+            PassengerClass passengerClass = flight.promptUserToSelectCabin();
+
+//    System.out.println("passengerClass "+ passengerClass);
+
+            flight.printSeatingChart(passengerClass);
+
+            Seat userSeatSelection = flight.chooseSeatByTypeGivenClass(passengerClass);
+
+            ////   System.out.println("userSeatSelection: " + userSeatSelection);
+
+            Passenger passenger = new Passenger();
+
+            passenger.createPassenger();
+            //   System.out.println("passenger: " + passenger);
+
+            //= flight.fetchSeat(passengerClass,)
+            //   System.out.println("reserving seat with the passenger info +seat");
+            //    System.out.println("seat: +seat");
+
+            //   System.out.println("seat before register: " + userSeatSelection);
+
+            userSeatSelection.setPassenger(passenger);
+            userSeatSelection.setBooked(true);
+
+            //   System.out.println("seat after register  " + userSeatSelection);
+
+            //  System.out.println("seat map");
+            //  flight.printSeatingChart();
+
+            //first
+            // System.out.println("seat: +seat");
+            //    if (true) System.exit(0);   //
 
 
-        PassengerClass passengerClass = flight.promptUserToSelectCabin();
-    System.out.println("passengerClass "+ passengerClass);
+            //   --      display.printSeatMap(PassengerClass.FIRST);
 
-        flight.printSeatingChart(passengerClass);
+            //  BookingManager bookingManager = new BookingManager(flight);
 
-        Seat userSeatSelection = flight.chooseSeatByTypeGivenClass(passengerClass);
+            System.out.print("Do you wish to reserve another seat? Select Yes (Y) or No (N): ");
 
-        System.out.println("userSeatSelection: " + userSeatSelection);
+            String menuSelection = keyboard.next().toUpperCase().trim();
 
-        Passenger passenger = new Passenger();
+            if(menuSelection.equals("Y")){doWork=true;}
+                    else{doWork=false;System.out.println("no more adding...");}
 
-        passenger.createPassenger();
-        System.out.println("passenger: " + passenger);
-
-        //= flight.fetchSeat(passengerClass,)
-        System.out.println("reserving seat with the passenger info +seat");
-        //    System.out.println("seat: +seat");
-
-        System.out.println("seat before register: " + userSeatSelection);
-
-        userSeatSelection.setPassenger(passenger);
-        userSeatSelection.setBooked(true);
-
-        System.out.println("seat after register  " + userSeatSelection);
-
-        System.out.println("seat map");
-        flight.printSeatingChart();
-
-        //first
-        // System.out.println("seat: +seat");
-    //    if (true) System.exit(0);   //
-
-
-        //   --      display.printSeatMap(PassengerClass.FIRST);
-
-        //  BookingManager bookingManager = new BookingManager(flight);
-
-
+            //System.out.println("menuSelection " + menuSelection);
+        }
     }
 
 }
