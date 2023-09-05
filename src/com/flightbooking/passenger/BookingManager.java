@@ -48,7 +48,7 @@ public class BookingManager {
             int relativeRow = logic.getRelativeSeatRow(passengerClass, seatRow);
             //System.out.println("Relative row in " + String.valueOf(passengerClass) + ": " + String.valueOf(relativeRow));
 
-            flight.bookSeat(passengerClass, relativeRow, seatLetterIndex, passengerInput);
+        //    flight.bookSeat(passengerClass, relativeRow, seatLetterIndex, passengerInput);
 
             Seat bookedSeat = flight.getClassCabin(passengerClass).seats[relativeRow][seatLetterIndex];
             bookedSeat.seatInfo();

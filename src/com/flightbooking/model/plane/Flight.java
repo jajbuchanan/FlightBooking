@@ -32,8 +32,19 @@ public class Flight {
         businessClassCabin.initializeSeats("business");
         travellerClassCabin.initializeSeats("traveller");
     }
+    public void displayClassSeats( ) {
+     this.firstClassCabin.printSeatingChart();
+           this.businessClassCabin.printSeatingChart();
+    this.travellerClassCabin.printSeatingChart();
 
-
+    }
+    public void displayClassSeats(PassengerClass pClass) {
+        switch (pClass) {
+            case FIRST -> this.firstClassCabin.printSeatingChart();
+            case BUSINESS -> this.businessClassCabin.printSeatingChart();
+            case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
+        }
+    }
 
 
     public Seat chooseSeatByTypeGivenClass(PassengerClass passengerClass) {
@@ -156,7 +167,7 @@ return seat;
 
     // define seat booking functions
 
-    public void bookSeat(
+    private void bookSedddat(
             PassengerClass passengerClass,
             int relativeRowNum,
             int seatLetterIndex,
@@ -199,13 +210,7 @@ return seat;
     }
 
 
-    public void displayClassSeats(PassengerClass pClass) {
-        switch (pClass) {
-            case FIRST -> this.firstClassCabin.printSeatingChart();
-            case BUSINESS -> this.businessClassCabin.printSeatingChart();
-            case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
-        }
-    }
+
 
     private void displayseatsbytypebyclass(PassengerClass pClass,
                                            SeatType seatType ) {

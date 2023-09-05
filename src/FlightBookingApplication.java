@@ -1,5 +1,4 @@
 import com.flightbooking.display.Display;
-import com.flightbooking.display.UserInput;
 import com.flightbooking.model.plane.Flight;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
@@ -17,7 +16,7 @@ public class FlightBookingApplication {
 
         Display display = new Display(flight);
 
-        PassengerClass passengerClass = display.displayClassSeats();
+        PassengerClass passengerClass = display.promptUserToSeletCabin();
 
   //this value is coming back null and needs to be fixed in the code
         //
@@ -33,10 +32,18 @@ public class FlightBookingApplication {
  //= flight.fetchSeat(passengerClass,)
         System.out.println("reserving seat with the passenger info +seat");
     //    System.out.println("seat: +seat");
+
+        System.out.println("seat before register: " + userSeatSelection);
+
         userSeatSelection.setPassenger(passenger);
         userSeatSelection.setBooked(true);
 
-     //first
+        System.out.println("seat after register  " + userSeatSelection);
+
+        System.out.println("seat map");
+flight.displayClassSeats();
+
+        //first
         // System.out.println("seat: +seat");
         if (true) System.exit(0);   //
 

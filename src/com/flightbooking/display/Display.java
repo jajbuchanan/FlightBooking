@@ -15,7 +15,7 @@ public class Display {
         this.keyboard = new Scanner(System.in);
     }
 
-    public PassengerClass displayClassSeats() {
+    public PassengerClass promptUserToSeletCabin() {
         System.out.println("Enter the cabin class (First, Business, Traveller): ");
         String classChoice = keyboard.next().toUpperCase();
         System.out.println("choice" + classChoice);
@@ -38,7 +38,7 @@ public class Display {
         }
     }
 
-    public void printSeatMapold(PassengerClass pClass, Seat[][] seats, int startRow) {
+    private void printSeatMapold(PassengerClass pClass, Seat[][] seats, int startRow) {
         switch (pClass) {
             //      case FIRST ->
             case BUSINESS -> System.out.println("\tA\tC\tD\tE\tF\tH");
