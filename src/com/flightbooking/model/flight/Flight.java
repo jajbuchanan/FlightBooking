@@ -712,10 +712,14 @@ public Seat cancelFlight(String passortNumber) {
         }
 
         System.out.println();
-        System.out.println("Class\t\tPrice");
-        System.out.println("Traveller\t" + travellerClassCounter * 1000);
-        System.out.println("Business\t\t" + businesslassCounter * 1200);
-        System.out.println("First\t\t" + firstClassCounter * 1800);
+        System.out.println("Class\tQuantity\tPrice");
+        System.out.println();
+
+        System.out.println("First\t\t" +firstClassCounter +"\t" + firstClassCounter * 1800);
+        System.out.println("Business\t\t"+ businesslassCounter +"\t" +  businesslassCounter * 1200);
+        System.out.println("Traveller\t" + + travellerClassCounter +"\t" + + travellerClassCounter * 1000);
+
+
         System.out.println();
 
 
