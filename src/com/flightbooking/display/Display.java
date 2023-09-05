@@ -38,67 +38,6 @@ public class Display {
         }
     }
 
-    public Seat chooseSeatByTypeGivenClass(PassengerClass passengerClass) {
-
-        Seat seat = null;
-        String userSeatSelection = null;
-
-        try {
-//
-            System.out.println("chosenClass: " + passengerClass);
-
-
-            System.out.println(" Enter the choice of seat type (window, standard, aisle) or seat number: ");
-
-            userSeatSelection = keyboard.next().toUpperCase();
-
-            System.out.println("userSeatSelection: " + userSeatSelection);
-
-   boolean isIndividualSeatAvailable = flight.isSpecificSeatAvailable(passengerClass,userSeatSelection);
-
-   System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
-
-
-   if(userSeatSelection.matches("[0-9A-Z]+")&& !isIndividualSeatAvailable){
-
-       System.out.println("user wanted a specific seat, but not available: + ");
-
-       System.out.println("choose a specific seat again");
-
-        userSeatSelection = keyboard.next().toUpperCase();
-
-       System.out.println("user seat choice " + userSeatSelection);
-
-       seat =  flight.fetchSeat(passengerClass,userSeatSelection);
-
-        isIndividualSeatAvailable=seat.isAvailable();
-   }
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Invalid input. Please enter a valid class.");
-        }
-
-return seat;
-            // /./first
- //  SeatType seatType = SeatType.valueOf(userSeatSelection);
-
-         //   System.out.println("seatType" + seatType);
-
-         //   System.out.println("priting class sets for this flight");
-
-//      flight.displayClassSeats(seatType);
-            ////        //   PassengerClass chosenClass = PassengerClass.valueOf(userSeatSelection);
-
-
-      //      this.flight.displayseatsbytypebyclass(chosenClass,seatType);
-
-
-            //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(userSeatSelection));
-            //       int startRow = flight.getClassCabin(chosenClass).getStartRow();
-            //    printSeatMap(chosenClass, seats, startRow);
-
-    }
-
     public void printSeatMapold(PassengerClass pClass, Seat[][] seats, int startRow) {
         switch (pClass) {
             //      case FIRST ->

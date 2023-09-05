@@ -21,21 +21,23 @@ public class FlightBookingApplication {
 
   //this value is coming back null and needs to be fixed in the code
         //
-        Seat userSeatSelection =    display.chooseSeatByTypeGivenClass(passengerClass);
+        Seat userSeatSelection =    flight.chooseSeatByTypeGivenClass(passengerClass);
 
-        System.out.println("seat: +seat");
+        System.out.println("userSeatSelection: "+userSeatSelection);
 
         Passenger passenger = new Passenger();
 
         passenger.createPassenger();
+        System.out.println("passenger: "+passenger);
 
  //= flight.fetchSeat(passengerClass,)
-        System.out.println("reserving seat: +seat");
-        System.out.println("seat: +seat");
+        System.out.println("reserving seat with the passenger info +seat");
+    //    System.out.println("seat: +seat");
         userSeatSelection.setPassenger(passenger);
         userSeatSelection.setBooked(true);
 
-        System.out.println("seat: +seat");
+     //first
+        // System.out.println("seat: +seat");
         if (true) System.exit(0);   //
 
 
