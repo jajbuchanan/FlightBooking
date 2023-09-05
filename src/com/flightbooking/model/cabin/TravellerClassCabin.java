@@ -1,5 +1,6 @@
 package com.flightbooking.model.cabin;
 
+import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
 import com.flightbooking.model.plane.SeatType;
 
@@ -63,6 +64,7 @@ public class TravellerClassCabin extends Cabin {
                 newSeat.setSeatRow(cabinRowNumber);
                 newSeat.setSeatLetter(cabinRowSeatLetter);
                 newSeat.setSeatNumber(cabinRowNumber, cabinRowSeatLetter);
+                newSeat.setPassengerClass(PassengerClass.TRAVELLER);
 
 
 

@@ -1,5 +1,6 @@
 package com.flightbooking.model.cabin;
 
+import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
 import com.flightbooking.model.plane.SeatType;
 
@@ -77,7 +78,7 @@ public class FirstClassCabin extends Cabin {
                 newSeat.setSeatRow(cabinRowNumber);
                 newSeat.setSeatLetter(cabinRowSeatLetter);
                 newSeat.setSeatNumber(cabinRowNumber, cabinRowSeatLetter);
-
+newSeat.setPassengerClass(PassengerClass.FIRST);
 
                 if (cabinRowSeatLetter == 'A' || cabinRowSeatLetter == 'H') {
                     newSeat.setType((SeatType.WINDOW));

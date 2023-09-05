@@ -101,4 +101,10 @@ public class Seat {
                 ", seatNumber='" + seatNumber + '\'' +
                 '}';
     }
+    private PassengerClass passengerClass;
+    public void setPassengerClass(PassengerClass passengerClass) {this.passengerClass = passengerClass;
+    }
+    public PassengerClass getPassengerClass(){
+        return this.passengerClass;
+    }
 }
