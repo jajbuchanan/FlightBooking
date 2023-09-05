@@ -11,18 +11,18 @@ public class FlightBookingApplication {
 
         PassengerClass passengerClass = flight.promptUserToSeletCabin();
 
-        Seat userSeatSelection =    flight.chooseSeatByTypeGivenClass(passengerClass);
+        Seat userSeatSelection = flight.chooseSeatByTypeGivenClass(passengerClass);
 
-        System.out.println("userSeatSelection: "+userSeatSelection);
+        System.out.println("userSeatSelection: " + userSeatSelection);
 
         Passenger passenger = new Passenger();
 
         passenger.createPassenger();
-        System.out.println("passenger: "+passenger);
+        System.out.println("passenger: " + passenger);
 
- //= flight.fetchSeat(passengerClass,)
+        //= flight.fetchSeat(passengerClass,)
         System.out.println("reserving seat with the passenger info +seat");
-    //    System.out.println("seat: +seat");
+        //    System.out.println("seat: +seat");
 
         System.out.println("seat before register: " + userSeatSelection);
 
@@ -32,7 +32,7 @@ public class FlightBookingApplication {
         System.out.println("seat after register  " + userSeatSelection);
 
         System.out.println("seat map");
-flight.displayClassSeats();
+        flight.displayClassSeats();
 
         //first
         // System.out.println("seat: +seat");
@@ -41,7 +41,7 @@ flight.displayClassSeats();
 
         //   --      display.printSeatMap(PassengerClass.FIRST);
 
-      //  BookingManager bookingManager = new BookingManager(flight);
+        //  BookingManager bookingManager = new BookingManager(flight);
 
 
     }

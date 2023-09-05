@@ -13,20 +13,15 @@ import java.util.Scanner;
 
 public class Flight {
 
-    private Scanner keyboard = new Scanner(System.in);
     private final FirstClassCabin firstClassCabin;
-
     private final BusinessClassCabin businessClassCabin;
-
     private final TravellerClassCabin travellerClassCabin;
+    private Scanner keyboard = new Scanner(System.in);
 
     public Flight() {
-        this.firstClassCabin = new FirstClassCabin(1);
-        this.businessClassCabin = new BusinessClassCabin(
-                firstClassCabin.getNumberOfRows() + 1);
-        this.travellerClassCabin = new TravellerClassCabin(
-                firstClassCabin.getNumberOfRows()
-                        + businessClassCabin.getNumberOfRows() + 1);
+        this.firstClassCabin = new FirstClassCabin();
+        this.businessClassCabin = new BusinessClassCabin();
+        this.travellerClassCabin = new TravellerClassCabin();
     }
 
     public void initialize() {
@@ -35,12 +30,14 @@ public class Flight {
         businessClassCabin.initializeSeats("business");
         travellerClassCabin.initializeSeats("traveller");
     }
-    public void displayClassSeats( ) {
-     this.firstClassCabin.printSeatingChart();
-           this.businessClassCabin.printSeatingChart();
-    this.travellerClassCabin.printSeatingChart();
+
+    public void displayClassSeats() {
+        this.firstClassCabin.printSeatingChart();
+        this.businessClassCabin.printSeatingChart();
+        this.travellerClassCabin.printSeatingChart();
 
     }
+
     public void displayClassSeats(PassengerClass pClass) {
         switch (pClass) {
             case FIRST -> this.firstClassCabin.printSeatingChart();
@@ -66,12 +63,12 @@ public class Flight {
 
             System.out.println("userSeatSelection: " + userSeatSelection);
 
-            boolean isIndividualSeatAvailable = isSpecificSeatAvailable(passengerClass,userSeatSelection);
+            boolean isIndividualSeatAvailable = isSpecificSeatAvailable(passengerClass, userSeatSelection);
 
             System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
 
 
-            if(userSeatSelection.matches("[0-9A-Z]+")&& !isIndividualSeatAvailable){
+            if (userSeatSelection.matches("[0-9A-Z]+") && !isIndividualSeatAvailable) {
 
                 System.out.println("user wanted a specific seat, but not available: + ");
 
@@ -81,17 +78,17 @@ public class Flight {
 
                 System.out.println("user seat choice " + userSeatSelection);
 
-                seat =  fetchSeat(passengerClass,userSeatSelection);
+                seat = fetchSeat(passengerClass, userSeatSelection);
 
                 System.out.println("returned seat: " + seat);
 
-                isIndividualSeatAvailable=seat.isAvailable();
+                isIndividualSeatAvailable = seat.isAvailable();
             }
 
 
             System.out.println("user seat choice " + userSeatSelection);
 
-            seat =  fetchSeat(passengerClass,userSeatSelection);
+            seat = fetchSeat(passengerClass, userSeatSelection);
 
             System.out.println("returned seat: " + seat);
 
@@ -120,24 +117,25 @@ public class Flight {
 
     }
 
-    public Seat  fetchSeat(PassengerClass passengerClass, String seatSelection){
+    public Seat fetchSeat(PassengerClass passengerClass, String seatSelection) {
 
         System.out.println(" enter ::  fetchSeat()");
 
-        int rowNumber= Integer.parseInt(seatSelection.replaceAll("[A-Z]+",""));//
+        int rowNumber = Integer.parseInt(seatSelection.replaceAll("[A-Z]+", ""));//
 
-        char seatLetter= seatSelection.replaceAll("[0-9]+","").charAt(0);
+        char seatLetter = seatSelection.replaceAll("[0-9]+", "").charAt(0);
 
         System.out.println("rowNumber: " + rowNumber);
 
         System.out.println("seatLetter: " + seatLetter);
 
-        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass,rowNumber,seatLetter);
+        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass, rowNumber, seatLetter);
         System.out.println("specificSeat fetchSeatByClassRowAndLetter: " + specificSeat);
 
         return specificSeat;
 
     }
+
     public Seat fetchSeatByClassRowAndLetter(PassengerClass passengerClass, int seatRow, char seatLetter) {
         System.out.println("enter // fetchSeatByClassRowAndLetter");
 
@@ -151,21 +149,21 @@ public class Flight {
                         firstClassCabin.seats[seatRow][firstClassCabin.getSeatLetterIndex(seatLetter)];
 
                 System.out.println("seat from the fetch" + seat);
-return seat;
+                return seat;
 
-                //].seatInfo();
-                //> firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+            //].seatInfo();
+            //> firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
 
-                //    break;
-                //         case BUSINESS -> businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-                //     case TRAVELLER -> travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-    //     break;
+            //    break;
+            //         case BUSINESS -> businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+            //     case TRAVELLER -> travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
+            //     break;
 
-           default:
+            default:
 
                 return null;
         }
-      //Fi  System.out.println("enter // fetchSeatByClassRowAndLetter");
+        //Fi  System.out.println("enter // fetchSeatByClassRowAndLetter");
     }
 
     // define seat booking functions
@@ -204,19 +202,17 @@ return seat;
     }
 
     // define getters for the cabins' rowLetters
-    public char[] classSeatLetters(PassengerClass cabinType) {
-        return switch (cabinType) {
-            case FIRST -> firstClassCabin.seatLetters;
-            case BUSINESS -> businessClassCabin.seatLetters;
-            case TRAVELLER -> travellerClassCabin.seatLetters;
+    public char[] lookupSeatLettersByCabinType(PassengerClass passengerClass) {
+        return switch (passengerClass) {
+            case FIRST -> firstClassCabin.getSeatLetters();
+            case BUSINESS -> businessClassCabin.getSeatLetters();
+            case TRAVELLER -> travellerClassCabin.getSeatLetters();
         };
     }
 
 
-
-
     private void displayseatsbytypebyclass(PassengerClass pClass,
-                                           SeatType seatType ) {
+                                           SeatType seatType) {
         switch (pClass) {
             case FIRST -> this.firstClassCabin.printSeatsBySeatType(seatType);
             //     case BUSINESS -> this.businessClassCabin.printSeatingChart();
@@ -234,7 +230,6 @@ return seat;
     }
 
 
-
     public void printSeatingMap() {
 
         System.out.println("printing the seat chart for the entire flight");
@@ -248,23 +243,24 @@ return seat;
 
     }
 
-    public boolean isSpecificSeatAvailable(PassengerClass passengerClass, String seatSelection){
+    public boolean isSpecificSeatAvailable(PassengerClass passengerClass, String seatSelection) {
 
         System.out.println(" enter ::  isSeatAvailable()");
 
-        int rowNumber= Integer.parseInt(seatSelection.replaceAll("[A-Z]+",""));//
-        char seatLetter= seatSelection.replaceAll("[0-9]+","").charAt(0);
+        int rowNumber = Integer.parseInt(seatSelection.replaceAll("[A-Z]+", ""));//
+        char seatLetter = seatSelection.replaceAll("[0-9]+", "").charAt(0);
 
         System.out.println("rowNumber: " + rowNumber);
 
         System.out.println("seatLetter: " + seatLetter);
 
-        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass,rowNumber,seatLetter);
+        Seat specificSeat = this.fetchSeatByClassRowAndLetter(passengerClass, rowNumber, seatLetter);
         System.out.println("specificSeat: " + specificSeat);
 
         return specificSeat.isAvailable();
 
     }
+
     public PassengerClass promptUserToSeletCabin() {
         System.out.println("Enter the cabin class (First, Business, Traveller): ");
         String classChoice = keyboard.next().toUpperCase();

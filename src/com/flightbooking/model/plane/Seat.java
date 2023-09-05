@@ -57,12 +57,13 @@ public class Seat {
     public boolean isBooked() {
         return isBooked;
     }
-    public boolean isAvailable() {
-        return !isBooked;
-    }
 
     public void setBooked(boolean booked) {
         isBooked = booked;
+    }
+
+    public boolean isAvailable() {
+        return !isBooked;
     }
 
     public int getSeatRow() {

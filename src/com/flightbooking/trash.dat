@@ -19,7 +19,7 @@
         }
     }
 
-    package com.flightbooking.display;
+    package com.flightbooking.trash.display;
 
     import com.flightbooking.model.plane.Flight;
     import com.flightbooking.model.plane.PassengerClass;
@@ -40,3 +40,19 @@
 
 
     }
+   /*  public seatLetters =
+
+
+
+    ;
+
+    {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'
+    }*/
+    //
+    // protected int numRows = 10; // Default value
+    //protected int startRow;
+
+    /*public Cabin(int startRow) {
+        this.startRow = startRow;
+    }*/
