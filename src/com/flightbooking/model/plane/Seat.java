@@ -2,7 +2,7 @@ package com.flightbooking.model.plane;
 
 import com.flightbooking.trash.passenger.Passenger;
 
-public class Seat {
+public class Seat  implements Comparable<Seat>{
     private SeatType type;
     private boolean isBooked;
     private Passenger passenger;
@@ -106,5 +106,20 @@ public class Seat {
     }
     public PassengerClass getPassengerClass(){
         return this.passengerClass;
+    }
+
+
+    @Override
+    public int compareTo(Seat other) {
+
+        System.out.println("doing compariable things");
+        if(this.passenger==null)return -1;
+        if(other.passenger==null)return 1;
+        System.out.println("not null");
+
+        int val = this.passenger.getLastName().compareTo(other.passenger.getLastName());
+
+        System.out.println("val: + "+val);
+        return val;
     }
 }

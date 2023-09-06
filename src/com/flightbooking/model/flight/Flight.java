@@ -9,8 +9,7 @@ import com.flightbooking.model.plane.Seat;
 import com.flightbooking.model.plane.SeatType;
 import com.flightbooking.trash.passenger.Passenger;
 
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Flight {
 
@@ -723,5 +722,100 @@ public Seat cancelFlight(String passortNumber) {
         System.out.println();
 
 
+    }
+    public void generateReportOfUserReservation() {
+        //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
+
+        //   System.out.println("calculateRevenueFromReservations // enter ");
+
+
+
+        List<Seat> seatList = new ArrayList<Seat>();
+
+        for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.firstClassCabin.seats[row][seatIndex];
+
+                if (seat.isBooked()) {
+
+                    System.out.println("found booked seat");
+
+                  seatList.add(seat);
+
+                }
+
+            }
+        }
+
+        for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.businessClassCabin.seats[row][seatIndex];
+
+                if (seat.isBooked()) {
+
+                    System.out.println("found booked seat");
+
+                    seatList.add(seat);
+
+                }
+
+            }
+        }
+
+        for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
+            for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
+
+                Seat seat = this.travellerClassCabin.seats[row][seatIndex];
+                if (seat.isBooked()) {
+
+                    System.out.println("found booked seat");
+
+                    seatList.add(seat);
+
+                }
+
+            }
+        }
+
+      //  System.out.println(seatList);
+
+        Collections.sort(seatList);
+
+   //     System.out.println(seatList);
+
+        //Collections.sor(seatList);
+
+    //    System.out.println(seatList);
+
+      //  System.out.println("Class\tQuantity\tPrice");
+     //   System.out.println();
+
+      //  System.out.println("First\t\t" +firstClassCounter +"\t" + firstClassCounter * 1800);
+      //  System.out.println("Business\t\t"+ businesslassCounter +"\t" +  businesslassCounter * 1200);
+    //    System.out.println("Traveller\t" + + travellerClassCounter +"\t" + + travellerClassCounter * 1000);
+
+
+      //  System.out.println();
+    //    Table 11. Sample report – passenger data sorted alphabetically by last name
+      System.out.println("  First name	Last name	Passport number	Seat reserved	Class	Type");
+
+      for(Seat seat:seatList) {
+
+          System.out.print(seat.getPassenger().getFirstName());System.out.print("\t");
+          System.out.print(seat.getPassenger().getLastName());System.out.print("\t");
+          System.out.print(seat.getPassenger().getPassportNumber());System.out.print("\t");
+          System.out.print(seat.getSeatNumber());System.out.print("\t");
+          System.out.print(seat.getPassengerClass());System.out.print("\t");
+          System.out.print(seat.getType());System.out.print("\t");
+
+          System.out.println("");1
+
+         // System.out.print("\t");
+
+
+
+      }
     }
 }
