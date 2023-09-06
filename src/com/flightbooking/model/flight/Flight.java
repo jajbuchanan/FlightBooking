@@ -27,15 +27,15 @@ private Scanner keyboard = new Scanner(System.in);
         this.businessClassCabin = new BusinessClassCabin();
 
         this.businessClassCabin.setLogicalRowNumberOffset(
-                        this.firstClassCabin.getLogicalRowNumberOffset()+
-                     this.firstClassCabin.getNumberOfRows());
+                this.firstClassCabin.getLogicalRowNumberOffset()
+                        + this.firstClassCabin.getNumberOfRows());
 
         this.businessClassCabin.initializeSeats();
 
         this.travellerClassCabin = new TravellerClassCabin();
         this.travellerClassCabin.setLogicalRowNumberOffset(
-                this.businessClassCabin.getLogicalRowNumberOffset()+
-                        this.businessClassCabin.getNumberOfRows());
+                this.businessClassCabin.getLogicalRowNumberOffset()
+                        + this.businessClassCabin.getNumberOfRows());
         this.travellerClassCabin.initializeSeats();
       //  this.travellerClassCabin.setLogicalRowNumberOffset(this.firstClassCabin.getNumberOfRows() + this.businessClassCabin.getNumberOfRows());
     }
@@ -67,42 +67,54 @@ private Scanner keyboard = new Scanner(System.in);
 //
             System.out.println("passengerClass: " + passengerClass);
 
-
             System.out.println(" Enter the choice of seat type (window, standard, aisle) or seat number: ");
 
             userSeatSelection = keyboard.next().toUpperCase();
 
             System.out.println("userSeatSelection: " + userSeatSelection);
 
-            boolean isIndividualSeatAvailable =this. isSpecificSeatAvailable(passengerClass, userSeatSelection);
-
-            System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
+            if (userSeatSelection.matches("[A-Z]+")) {
 
 
-            if (userSeatSelection.matches("[0-9A-Z]+") && !isIndividualSeatAvailable) {
+                System.out.print("user wanted a type of seat, not specific seat");
+                seat = fetchSeatByClassByType(passengerClass, userSeatSelection);
 
-                System.out.println("user wanted a specific seat, but not available: + ");
+                System.out.println("returned seat: " + seat);
+            }
+            else {
 
-                System.out.println("choose a specific seat again");
+                System.out.print("specific seat|1" +
+                        "");
 
-                userSeatSelection = keyboard.next().toUpperCase();
+                boolean isIndividualSeatAvailable = this.isSpecificSeatAvailable(passengerClass, userSeatSelection);
+
+                System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
+
+
+                if (userSeatSelection.matches("[0-9A-Z]+") && !isIndividualSeatAvailable) {
+
+                    System.out.println("user wanted a specific seat, but not available: + ");
+
+                    System.out.println("choose a specific seat again");
+
+                    userSeatSelection = keyboard.next().toUpperCase();
+
+                    System.out.println("user seat choice " + userSeatSelection);
+
+                    seat = fetchSeat(passengerClass, userSeatSelection);
+
+                    System.out.println("returned seat: " + seat);
+
+                    isIndividualSeatAvailable = seat.isAvailable();
+
+                }
 
                 System.out.println("user seat choice " + userSeatSelection);
 
                 seat = fetchSeat(passengerClass, userSeatSelection);
 
                 System.out.println("returned seat: " + seat);
-
-                isIndividualSeatAvailable = seat.isAvailable();
-
             }
-
-            System.out.println("user seat choice " + userSeatSelection);
-
-            seat = fetchSeat(passengerClass, userSeatSelection);
-
-            System.out.println("returned seat: " + seat);
-
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid input. Please enter a valid class.");
         }
@@ -128,7 +140,244 @@ private Scanner keyboard = new Scanner(System.in);
 
     }
 
-    public Seat fetchSeat(PassengerClass passengerClass, String seatSelection) {
+    private Seat fetchSeatByClassByType(PassengerClass passengerClass, String seatType) {
+
+        if(passengerClass.equals(PassengerClass.FIRST)) {
+            for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
+                for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
+
+                    Seat seat = this.firstClassCabin.seats[row][seatIndex];
+                    //   System.out.println("checking: "+seat);
+
+                    if (seat.isAvailable()&&seat.getType().toString().toUpperCase().equals(seatType.toUpperCase().trim())) {
+
+
+
+                        System.out.println("found available seat matching seat type;");
+
+//seat.setBooked(true);
+                      //  seat.setPassenger(passenger);
+
+                        return seat;
+                    }
+
+                }
+            }
+        }
+
+        if(passengerClass.equals(PassengerClass.BUSINESS)) {
+            for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
+                for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
+
+                    Seat seat = this.businessClassCabin.seats[row][seatIndex];
+                    //    System.out.println("checking: "+seat);
+
+                    if (seat.isAvailable()&&seat.getType().toString().toUpperCase().equals(seatType.toUpperCase().trim())) {
+
+                        System.out.println("found available seat;");
+
+//seat.setBooked(true);
+                      //  seat.setPassenger(passenger);
+
+                        return seat;
+                    }
+
+                }
+            }
+        }
+
+        if(passengerClass.equals(PassengerClass.TRAVELLER)) {
+            for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
+                for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
+
+                    Seat seat = this.travellerClassCabin.seats[row][seatIndex];
+                    System.out.println("checking: "+seat);
+                    if (seat.isAvailable()&&seat.getType().toString().toUpperCase().equals(seatType.toUpperCase().trim())) {
+
+                        System.out.println("found available seat;");
+
+                  //      seat.setBooked(true);
+                //        seat.setPassenger(passenger);
+
+                        return seat;
+                    }
+
+                }
+            }
+        }
+
+        ////  System.out.println("found seat that was deleted:"+foundSeat);
+        return null;
+    }
+    public Seat chooseSeatsForGroup(PassengerClass classSeletion, int  groupSize) {
+
+        Seat seat = null;
+        String userSeatSelection = null;
+
+        List<Passenger> plist = new ArrayList();
+
+        for(int i =0;i<groupSize;i++){
+
+            if(i==0){
+           Passenger pass = new Passenger();
+                //
+                System.out.print("Enter the 1st passenger’s first name: ");
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+pass.setFirstName(userSeatSelection);
+
+//
+                System.out.print("  Enter the 1st passenger’s last name: ");
+
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setLastName(userSeatSelection);
+              //
+
+                       System.out.print("  Enter the 1st passport number: ");
+
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setPassportNumber(userSeatSelection);
+plist.add(pass);
+
+            }else   if(i==2){
+                Passenger pass = new Passenger();
+                //
+                System.out.print("Enter the 2nd passenger’s first name: ");
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setFirstName(userSeatSelection);
+
+//
+                System.out.print("  Enter the 2nd passenger’s last name: ");
+
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setLastName(userSeatSelection);
+                //
+
+                System.out.print("  Enter the 2nd passport number: ");
+
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setPassportNumber(userSeatSelection);
+                plist.add(pass);
+
+            }else  if(i==3){
+                Passenger pass = new Passenger();
+                //
+                System.out.print("Enter the 3rd passenger’s first name: ");
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setFirstName(userSeatSelection);
+
+//
+                System.out.print("  Enter the 3rd passenger’s last name: ");
+
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setLastName(userSeatSelection);
+                //
+
+                System.out.print("  Enter the 3rd passport number: ");
+
+                userSeatSelection = keyboard.next().toUpperCase();
+
+                System.out.println("userSeatSelection: " + userSeatSelection);
+                pass.setPassportNumber(userSeatSelection);
+                plist.add(pass);
+
+            }
+
+        }
+
+        for(Passenger passenger:plist){
+            reserveFirstAvailableSeatInClass(classSeletion,passenger);}
+
+        return seat;
+
+    }
+
+    private Seat reserveFirstAvailableSeatInClass(PassengerClass passengerClass, Passenger passenger ) {
+
+        if(passengerClass.equals(PassengerClass.FIRST)) {
+            for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
+                for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
+
+                    Seat seat = this.firstClassCabin.seats[row][seatIndex];
+                    //   System.out.println("checking: "+seat);
+
+                    if (seat.isAvailable()) {
+
+                        System.out.println("found available seat;");
+
+                        seat.setBooked(true);
+                        seat.setPassenger(passenger);
+
+                      return seat;
+                    }
+
+                }
+            }
+        }
+
+        if(passengerClass.equals(PassengerClass.BUSINESS)) {
+            for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
+                for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
+
+                    Seat seat = this.businessClassCabin.seats[row][seatIndex];
+                //    System.out.println("checking: "+seat);
+
+                    if (seat.isAvailable()) {
+
+                        System.out.println("found available seat;");
+
+                        seat.setBooked(true);
+                        seat.setPassenger(passenger);
+
+                        return seat;
+                    }
+
+                }
+            }
+        }
+
+        if(passengerClass.equals(PassengerClass.TRAVELLER)) {
+            for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
+                for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
+
+                    Seat seat = this.travellerClassCabin.seats[row][seatIndex];
+                    System.out.println("checking: "+seat);
+                    if (seat.isAvailable()) {
+
+                        System.out.println("found available seat;");
+
+                        seat.setBooked(true);
+                        seat.setPassenger(passenger);
+
+                        return seat;
+                    }
+
+                }
+            }
+        }
+
+      ////  System.out.println("found seat that was deleted:"+foundSeat);
+        return null;
+    }
+
+
+
+        public Seat fetchSeat(PassengerClass passengerClass, String seatSelection) {
 
         System.out.println(" enter ::  fetchSeat()");
 
@@ -251,7 +500,7 @@ private Scanner keyboard = new Scanner(System.in);
 
     // define seat booking functions
 
-    private void bookSedddat(
+    private void bookSeatOld(
             PassengerClass passengerClass,
             int relativeRowNum,
             int seatLetterIndex,
@@ -388,7 +637,7 @@ public Seat cancelFlight(String passortNumber) {
 
     System.out.println("cancelFlight // enter ");
 
-    System.out.println("deleting a reserveration w/ passort number" + passortNumber);
+    System.out.println("deleting a reservation w/ passport number" + passortNumber);
 
     Seat foundSeat = null;
 
@@ -810,7 +1059,7 @@ public Seat cancelFlight(String passortNumber) {
           System.out.print(seat.getPassengerClass());System.out.print("\t");
           System.out.print(seat.getType());System.out.print("\t");
 
-          System.out.println("");1
+          System.out.println("");
 
          // System.out.print("\t");
 

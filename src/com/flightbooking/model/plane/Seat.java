@@ -112,7 +112,7 @@ public class Seat  implements Comparable<Seat>{
     @Override
     public int compareTo(Seat other) {
 
-        System.out.println("doing compariable things");
+        System.out.println("doing comparable things");
         if(this.passenger==null)return -1;
         if(other.passenger==null)return 1;
         System.out.println("not null");
