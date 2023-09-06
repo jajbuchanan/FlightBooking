@@ -1,11 +1,11 @@
-package Passenger;
-import Plane.*;
-import Passenger.*;
+package com.flightbooking.trash.passenger;
+
+import com.flightbooking.model.plane.Seat;
 
 public class Booking {
     // details booking information
 
-    private static int bookingCounter = 0; // for unique booking ID
+    private static int bookingCounter = 44523; // for unique booking ID
     private final int bookingID;
 
     // details passenger information
@@ -24,15 +24,6 @@ public class Booking {
         this.bookingID = bookingCounter++;
     }
 
-
-
-
-
-
-    public Passenger getPassenger() {
-        return this.passenger;
-    }
-
     public static int getBookingCounter() {
         return bookingCounter;
     }
@@ -41,12 +32,20 @@ public class Booking {
         Booking.bookingCounter = bookingCounter;
     }
 
-    public int getBookingID() {
-        return bookingID;
+    public String bookingRef() {
+        return String.valueOf("BR" + bookingID);
+    }
+
+    public Passenger getPassenger() {
+        return this.passenger;
     }
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public int getBookingID() {
+        return bookingID;
     }
 
     public int getPassengerRelativeRow() {

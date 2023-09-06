@@ -1,4 +1,4 @@
-package Utils;
+package com.flightbooking.utils;
 
 public class Utils {
     public boolean charInArray(char[] array, char target) {

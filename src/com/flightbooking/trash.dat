@@ -1,0 +1,117 @@
+ private void printSeatMapold(PassengerClass pClass, Seat[][] seats, int startRow) {
+        switch (pClass) {
+            //      case FIRST ->
+            case BUSINESS -> System.out.println("\tA\tC\tD\tE\tF\tH");
+            case TRAVELLER -> System.out.println("\tA\tB\tC\tD\tE\tF\tG\tH");
+            default -> throw new IllegalArgumentException("Invalid class type: " + pClass);
+        }
+
+        for (int i = 0; i < seats.length; i++) {
+            System.out.println(startRow + i + "\t");
+            for (int j = 0; j < seats[i].length; j++) {
+                if (seats[i][j].isBooked()) {
+                    System.out.println("  X\t");
+                } else {
+                    System.out.println(seats[i][j].getType() + "\t");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    package com.flightbooking.trash.display;
+
+    import com.flightbooking.model.plane.Flight;
+    import com.flightbooking.model.plane.PassengerClass;
+    import com.flightbooking.model.plane.Seat;
+
+    import java.u1til.Scanner;
+
+    public class Display {
+        private Flight flight;
+        private Scanner keyboard;
+
+        public Display(Flight flight) {
+            this.flight = flight;
+            this.keyboard = new Scanner(System.in);
+        }
+
+
+
+
+    }
+   /*  public seatLetters =
+
+
+
+    ;
+
+    {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'
+    }*/
+    //
+    // protected int numRows = 10; // Default value
+    //protected int startRow;
+
+    /*public Cabin(int startRow) {
+        this.startRow = startRow;
+    }*/
+
+
+        private void initializeSeat222s(String cabinClass) {
+
+            seats = new Seat[this.getNumberOfRows()][this.getSeatLetters().length];
+
+            // set initial values for initialised seats
+            for (int i = 0; i < this.getNumberOfRows(); i++) {
+                for (int j = 0; j < this.getSeatLetters().length; j++) {
+
+                    seats[i][j] = new Seat();
+
+                    //
+
+                    //      row stuff
+
+                    //  seats[i][j].setSeatRow(startRow + i); // because seat rows start from 1
+                    seats[i][j].setSeatLetter((this.getSeatLetters()[j]));
+
+                    // assign seat types based on seat letters
+
+                    if (this.getSeatLetters()[j] == 'A' || this.getSeatLetters()[j] == 'H') {
+                        seats[i][j].setType((SeatType.WINDOW));
+                    } else if (cabinClass.equals("business") && (this.getSeatLetters()[j] == 'C' || this.getSeatLetters()[j] == 'F')) {
+                        seats[i][j].setType(SeatType.MIDDLE);
+                    } else if (this.getSeatLetters()[j] == 'B' || this.getSeatLetters()[j] == 'F') {
+                        seats[i][j].setType(SeatType.STANDARD);
+                    } else if (cabinClass.equals("traveler") && (this.getSeatLetters()[j] == 'C' || this.getSeatLetters()[j] == 'F')) {
+                        seats[i][j].setType(SeatType.STANDARD);
+                    } else {
+                        seats[i][j].setType(SeatType.AISLE);
+                    }
+                }
+            }
+        }
+
+
+        // method to get the seat letters for each cabin
+
+        // iterate through all of the seat letters in the seatLetters array to identify the index in the line
+
+
+        // define method to print info for all seats in class
+    /*
+        public int getStartRow() {
+            return startRow;
+        }
+
+        public void setStartRow(int startRow) {
+            this.startRow = startRow;
+        }*/
+
+        private void cabinSeatInfo() {
+            for (int i = 0; i < this.getNumberOfRows(); i++) {
+                for (int j = 0; j < this.getSeatLetters().length; j++) {
+                    seats[i][j].seatInfo();
+                }
+            }
+        }

@@ -1,8 +1,14 @@
-package Display;
-import java.util.*;
-import Passenger.*;
-import Plane.*;
-import Logic.*;
+/*
+package com.flightbooking.trash;
+
+import com.flightbooking.model.plane.Flight;
+
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.model.plane.Seat;
+import com.flightbooking.trash.passenger.Booking;
+import com.flightbooking.trash.passenger.Passenger;
+
+import java.util.Scanner;
 
 public class UserInput {
     Scanner keyboard = new Scanner(System.in);
@@ -30,6 +36,7 @@ public class UserInput {
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input. Enter a valid seat.");
             }
+            System.out.println("Enter a valid seat number.");
         }
     }
 
@@ -66,3 +73,4 @@ public class UserInput {
 
 
 }
+*/

@@ -1,14 +1,15 @@
-package Logic;
-import Display.*;
-import Passenger.Passenger;
-import Plane.*;
-import java.util.*;
-import Utils.*;
+package com.flightbooking.trash;
+/*
+import com.flightbooking.model.plane.Flight;
+import com.flightbooking.model.plane.PassengerClass;
+import com.flightbooking.utils.Utils;
+
+import java.util.Scanner;
 
 public class InputLogic {
-    private Flight flight;
     Scanner keyboard = new Scanner(System.in);
     Utils utils = new Utils();
+    private Flight flight;
 
     public InputLogic(Flight flight) {
         this.flight = flight;
@@ -26,16 +27,14 @@ public class InputLogic {
             PassengerClass pClass,
             int rowNum) {
         return switch (pClass) {
-            case FIRST -> rowNum;
-            case BUSINESS -> rowNum - flight.getClassRows(PassengerClass.FIRST);
-            case TRAVELLER ->
-                    rowNum - (flight.getClassRows(PassengerClass.FIRST) + flight.getClassRows(PassengerClass.BUSINESS));
+            case FIRST -> rowNum - 1;
+            case BUSINESS -> rowNum - flight.getClassRows(PassengerClass.FIRST)
+                    - 1;
+            case TRAVELLER -> rowNum - (flight.getClassRows(PassengerClass.FIRST)
+                    + flight.getClassRows(PassengerClass.BUSINESS))
+                    - 1;
             default -> throw new IllegalArgumentException("Invalid class type: " + pClass);
         };
-    }
-
-    public int classSeatColumn(PassengerClass passengerClass, char seatLetter) {
-        return flight.classSeatLetterIndex(passengerClass, seatLetter);
     }
 
     // Method to ask user for a seat number - returns the class the seat is in:
@@ -43,11 +42,11 @@ public class InputLogic {
         String input;
         System.out.println("Enter a seat number: (e.g. 15B) ");
         input = keyboard.next();
-        return findSeatClass(input);
+        return lookupSeatClassBySpecificSeat(input);
     }
 
     // Method to determine cabin class from user input
-    public PassengerClass findSeatClass(String seatInput) {
+    public PassengerClass lookupSeatClassBySpecificSeat(String seatInput) {
         int rowNum = Integer.parseInt(seatInput.substring(
                 0, seatInput.length() - 1));
         if (rowNum <= flight.getClassRows(PassengerClass.FIRST)) {
@@ -67,7 +66,10 @@ public class InputLogic {
         }
     }
 
-    public int findClassRow(
+    // seatValidator || lookupseatclassbyspecificseat || calculaterelativerowinclass
+    // String seatInput --> validated by seatValidator --> lookupseatclassbyspecificseat --> calculaterelativerowinclass
+
+    public int calculateRelativeRowInClass(
             PassengerClass passengerClass,
             String seatInput) {
         int classRow;
@@ -80,24 +82,34 @@ public class InputLogic {
             }
             case BUSINESS -> {
                 classRow =
-                    rawRowNum
-                    - flight.getClassRows(PassengerClass.FIRST);
+                        rawRowNum
+                                - flight.getClassRows(PassengerClass.FIRST);
                 yield classRow;
             }
             case TRAVELLER -> {
                 classRow =
-                    rawRowNum
-                    - flight.getClassRows(PassengerClass.FIRST)
-                    - flight.getClassRows(PassengerClass.BUSINESS);
-                    yield classRow;
+                        rawRowNum
+                                - flight.getClassRows(PassengerClass.FIRST)
+                                - flight.getClassRows(PassengerClass.BUSINESS);
+                yield classRow;
             }
+        };
+    }
+
+    public int returnSeatLetterRelativeIndex(
+            PassengerClass passengerClass,
+            char seatLetter) {
+        return switch (passengerClass) {
+            case FIRST -> flight.getClassCabin(PassengerClass.FIRST).getSeatLetterIndex(seatLetter);
+            case BUSINESS -> flight.getClassCabin(PassengerClass.BUSINESS).getSeatLetterIndex(seatLetter);
+            case TRAVELLER -> flight.getClassCabin(PassengerClass.TRAVELLER).getSeatLetterIndex(seatLetter);
         };
     }
 
     public boolean seatValidator(String seatNum) {
         int num = returnSeatRow(seatNum);
         char letter = returnSeatLetter(seatNum);
-        PassengerClass seatClass = findSeatClass(seatNum);
+        PassengerClass seatClass = lookupSeatClassBySpecificSeat(seatNum);
         int numRows;
         char[] rowLetters;
         switch (seatClass) {
@@ -126,3 +138,4 @@ public class InputLogic {
     }
 
 }
+*/
