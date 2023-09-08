@@ -1,4 +1,4 @@
-package com.flightbooking.trash.passenger;
+package com.flightbooking.model.passenger;
 
 import java.util.Scanner;
 

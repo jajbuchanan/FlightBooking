@@ -1,5 +1,6 @@
 package com.flightbooking.trash.passenger;
 
+import com.flightbooking.model.passenger.Passenger;
 import com.flightbooking.model.plane.Seat;
 
 public class Booking {

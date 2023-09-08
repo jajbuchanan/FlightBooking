@@ -1,10 +1,8 @@
 import com.flightbooking.model.flight.Flight;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
-import com.flightbooking.trash.passenger.Passenger;
+import com.flightbooking.model.passenger.Passenger;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class FlightBookingApplication {

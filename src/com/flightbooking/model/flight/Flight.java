@@ -7,7 +7,7 @@ import com.flightbooking.model.cabin.TravellerClassCabin;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
 import com.flightbooking.model.plane.SeatType;
-import com.flightbooking.trash.passenger.Passenger;
+import com.flightbooking.model.passenger.Passenger;
 
 import java.util.*;
 
@@ -16,7 +16,7 @@ public class Flight {
     private final FirstClassCabin firstClassCabin;
     private final BusinessClassCabin businessClassCabin;
     private final TravellerClassCabin travellerClassCabin;
-private Scanner keyboard = new Scanner(System.in);
+private final Scanner keyboard = new Scanner(System.in);
 
     public Flight() {
 
@@ -61,7 +61,7 @@ private Scanner keyboard = new Scanner(System.in);
     public Seat chooseSeatByTypeGivenClass(PassengerClass passengerClass) {
 
         Seat seat = null;
-        String userSeatSelection = null;
+        String userSeatSelection;
 
         try {
 //
@@ -83,8 +83,7 @@ private Scanner keyboard = new Scanner(System.in);
             }
             else {
 
-                System.out.print("specific seat|1" +
-                        "");
+                System.out.print("specific seat|1");
 
                 boolean isIndividualSeatAvailable = this.isSpecificSeatAvailable(passengerClass, userSeatSelection);
 
@@ -105,8 +104,6 @@ private Scanner keyboard = new Scanner(System.in);
 
                     System.out.println("returned seat: " + seat);
 
-                    isIndividualSeatAvailable = seat.isAvailable();
-
                 }
 
                 System.out.println("user seat choice " + userSeatSelection);
@@ -120,23 +117,7 @@ private Scanner keyboard = new Scanner(System.in);
         }
 
         return seat;
-        // /./first
-        //  SeatType seatType = SeatType.valueOf(userSeatSelection);
 
-        //   System.out.println("seatType" + seatType);
-
-        //   System.out.println("priting class sets for this flight");
-
-//      flight.displayClassSeats(seatType);
-        ////        //   PassengerClass chosenClass = PassengerClass.valueOf(userSeatSelection);
-
-
-        //      this.flight.displayseatsbytypebyclass(chosenClass,seatType);
-
-
-        //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(userSeatSelection));
-        //       int startRow = flight.getClassCabin(chosenClass).getStartRow();
-        //    printSeatMap(chosenClass, seats, startRow);
 
     }
 
@@ -155,9 +136,6 @@ private Scanner keyboard = new Scanner(System.in);
 
                         System.out.println("found available seat matching seat type;");
 
-//seat.setBooked(true);
-                      //  seat.setPassenger(passenger);
-
                         return seat;
                     }
 
@@ -175,9 +153,6 @@ private Scanner keyboard = new Scanner(System.in);
                     if (seat.isAvailable()&&seat.getType().toString().toUpperCase().equals(seatType.toUpperCase().trim())) {
 
                         System.out.println("found available seat;");
-
-//seat.setBooked(true);
-                      //  seat.setPassenger(passenger);
 
                         return seat;
                     }
@@ -209,12 +184,12 @@ private Scanner keyboard = new Scanner(System.in);
         ////  System.out.println("found seat that was deleted:"+foundSeat);
         return null;
     }
-    public Seat chooseSeatsForGroup(PassengerClass classSeletion, int  groupSize) {
+    public Seat chooseSeatsForGroup(PassengerClass classSelection, int  groupSize) {
 
         Seat seat = null;
-        String userSeatSelection = null;
+        String userSeatSelection;
 
-        List<Passenger> plist = new ArrayList();
+        List<Passenger> plist = new ArrayList<>();
 
         for(int i =0;i<groupSize;i++){
 
@@ -301,7 +276,7 @@ plist.add(pass);
         }
 
         for(Passenger passenger:plist){
-            reserveFirstAvailableSeatInClass(classSeletion,passenger);}
+            reserveFirstAvailableSeatInClass(classSelection,passenger);}
 
         return seat;
 
@@ -483,54 +458,12 @@ plist.add(pass);
                 System.out.println("seat from the fetch" + seat);
 
                 return seat;
-            //].seatInfo();
-            //> firstClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-
-            //    break;
-            //         case BUSINESS -> businessClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-            //     case TRAVELLER -> travellerClassCabin.seats[relativeRow][seatLetterIndex].seatInfo();
-            //     break;
 
             default:
 
                 return null;
         }
         //Fi  System.out.println("enter // fetchSeatByClassRowAndLetter");
-    }
-
-    // define seat booking functions
-
-    private void bookSeatOld(
-            PassengerClass passengerClass,
-            int relativeRowNum,
-            int seatLetterIndex,
-            Passenger passenger) {
-        switch (passengerClass) {
-            case FIRST: {
-                // firstClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
-                firstClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
-                break;
-            }
-            case BUSINESS: {
-                //  businessClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
-                businessClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
-                break;
-            }
-            case TRAVELLER: {
-                //   travellerClassCabin.seats[relativeRowNum][seatLetterIndex].bookSeat(passenger);
-                travellerClassCabin.seats[relativeRowNum][seatLetterIndex].setPassenger(passenger);
-                break;
-            }
-        }
-    }
-
-    // define getters for the cabins' numRows
-    public int getClassRows(PassengerClass cabinType) {
-        return switch (cabinType) {
-            case FIRST -> firstClassCabin.getNumberOfRows();
-            case BUSINESS -> businessClassCabin.getNumberOfRows();
-            case TRAVELLER -> travellerClassCabin.getNumberOfRows();
-        };
     }
 
     // define getters for the cabins' rowLetters

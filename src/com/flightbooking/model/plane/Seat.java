@@ -1,6 +1,6 @@
 package com.flightbooking.model.plane;
 
-import com.flightbooking.trash.passenger.Passenger;
+import com.flightbooking.model.passenger.Passenger;
 
 public class Seat  implements Comparable<Seat>{
     private SeatType type;
