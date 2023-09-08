@@ -34,15 +34,32 @@ public class Passenger {
     }
 
     public void passengerFirstNameInput() {
-        System.out.println("Enter passenger first name: ");
-        setFirstName(keyboard.next());
+        String input;
+        while (true) {
+            System.out.println("Enter passenger first name: ");
+            input = keyboard.next();
+            if (input.matches("^[a-zA-Z]+$")) {
+                setFirstName(input);
+                break;
+            } else {
+                System.out.println("Invalid input. First name should only contain letters from A-Z");
+            }
+        }
     }
 
     public void passengerLastNameInput() {
-        System.out.println("Enter passenger last name: ");
-        setLastName(keyboard.next());
+        String input;
+        while (true) {
+            System.out.println("Enter passenger last name: ");
+            input = keyboard.next();
+            if (input.matches("^[a-zA-Z]+$")) {
+                setLastName(input);
+                break;
+            } else {
+                System.out.println("Invalid input. First name should only contain letters from A-Z");
+            }
+        }
     }
-
     public void passengerPassportNumberInput() {
         String input;
         while (true) {

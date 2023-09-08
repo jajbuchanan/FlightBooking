@@ -907,10 +907,12 @@ public Seat cancelFlight(String passortNumber) {
 
         //   System.out.println("calculateRevenueFromReservations // enter ");
 
+        // declare counters by class
         int firstClassCounter = 0;
-        int businesslassCounter = 0;
+        int businessClassCounter = 0;
         int travellerClassCounter = 0;
 
+        // iterate through first class, increment firstClassCounter by 1 for every booked seat found
         for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
             for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
 
@@ -926,7 +928,7 @@ public Seat cancelFlight(String passortNumber) {
 
             }
         }
-
+        // iterate through business class, increment businessClassCounter by 1 for every booked seat found
         for (int row = 0; row < this.businessClassCabin.getNumberOfRows(); row++) {
             for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
 
@@ -936,13 +938,14 @@ public Seat cancelFlight(String passortNumber) {
 
                     System.out.println("found booked seat");
 
-                    businesslassCounter++;
+                    businessClassCounter++;
 
                 }
 
             }
         }
-
+        
+        // iterate through traveller class, increment travellerClassCounter by 1 for every booked seat found
         for (int row = 0; row < this.travellerClassCabin.getNumberOfRows(); row++) {
             for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
 
@@ -963,11 +966,11 @@ public Seat cancelFlight(String passortNumber) {
         System.out.println("Class\tQuantity\tPrice");
         System.out.println();
 
-        System.out.println("First\t\t" +firstClassCounter +"\t" + firstClassCounter * 1800);
-        System.out.println("Business\t\t"+ businesslassCounter +"\t" +  businesslassCounter * 1200);
-        System.out.println("Traveller\t" + + travellerClassCounter +"\t" + + travellerClassCounter * 1000);
-
-
+        // output the number of seats booked in the cabin, and the total revenue from that cabin
+        System.out.println("First\t\t" +firstClassCounter +"\t $" + firstClassCounter * 1800);
+        System.out.println("Business\t\t"+ businessClassCounter +"\t $" +  businessClassCounter * 1200);
+        System.out.println("Traveller\t" + + travellerClassCounter +"\t $" + travellerClassCounter * 1000);
+        
         System.out.println();
 
 
