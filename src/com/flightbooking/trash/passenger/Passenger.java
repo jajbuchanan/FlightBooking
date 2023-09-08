@@ -1,8 +1,5 @@
 package com.flightbooking.trash.passenger;
 
-import com.flightbooking.model.plane.PassengerClass;
-import com.flightbooking.model.plane.SeatType;
-
 import java.util.Scanner;
 
 public class Passenger {
@@ -11,8 +8,6 @@ public class Passenger {
     private String lastName;
     private String passportNumber;
     private String seatNumber;
-    private SeatType seatType;
-    private PassengerClass passengerClass;
 
     public Passenger() {
         this.firstName = "";
@@ -77,13 +72,6 @@ public class Passenger {
         }
     }
 
-
-    public void getPassengerDetails() {
-        System.out.println("com.flightbooking.Passenger first name: " + getFirstName());
-        System.out.println("com.flightbooking.Passenger last name: " + getLastName());
-        System.out.println("com.flightbooking.Passenger passport number: " + getPassportNumber());
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -108,12 +96,5 @@ public class Passenger {
         this.passportNumber = passportNumber;
     }
 
-    public String getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
 
 }
