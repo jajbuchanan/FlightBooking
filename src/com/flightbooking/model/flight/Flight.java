@@ -1,12 +1,10 @@
 package com.flightbooking.model.flight;
 
 import com.flightbooking.model.cabin.BusinessClassCabin;
-import com.flightbooking.model.cabin.Cabin;
 import com.flightbooking.model.cabin.FirstClassCabin;
 import com.flightbooking.model.cabin.TravellerClassCabin;
 import com.flightbooking.model.plane.PassengerClass;
 import com.flightbooking.model.plane.Seat;
-import com.flightbooking.model.plane.SeatType;
 import com.flightbooking.model.passenger.Passenger;
 
 import java.util.*;
@@ -171,8 +169,7 @@ private final Scanner keyboard = new Scanner(System.in);
 
                         System.out.println("found available seat;");
 
-                  //      seat.setBooked(true);
-                //        seat.setPassenger(passenger);
+
 
                         return seat;
                     }
@@ -184,9 +181,8 @@ private final Scanner keyboard = new Scanner(System.in);
         ////  System.out.println("found seat that was deleted:"+foundSeat);
         return null;
     }
-    public Seat chooseSeatsForGroup(PassengerClass classSelection, int  groupSize) {
+    public void chooseSeatsForGroup(PassengerClass classSelection, int  groupSize) {
 
-        Seat seat = null;
         String userSeatSelection;
 
         List<Passenger> plist = new ArrayList<>();
@@ -278,11 +274,9 @@ plist.add(pass);
         for(Passenger passenger:plist){
             reserveFirstAvailableSeatInClass(classSelection,passenger);}
 
-        return seat;
-
     }
 
-    private Seat reserveFirstAvailableSeatInClass(PassengerClass passengerClass, Passenger passenger ) {
+    private void reserveFirstAvailableSeatInClass(PassengerClass passengerClass, Passenger passenger ) {
 
         if(passengerClass.equals(PassengerClass.FIRST)) {
             for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
@@ -298,7 +292,7 @@ plist.add(pass);
                         seat.setBooked(true);
                         seat.setPassenger(passenger);
 
-                      return seat;
+                      return;
                     }
 
                 }
@@ -319,7 +313,7 @@ plist.add(pass);
                         seat.setBooked(true);
                         seat.setPassenger(passenger);
 
-                        return seat;
+                        return;
                     }
 
                 }
@@ -339,7 +333,7 @@ plist.add(pass);
                         seat.setBooked(true);
                         seat.setPassenger(passenger);
 
-                        return seat;
+                        return;
                     }
 
                 }
@@ -347,7 +341,6 @@ plist.add(pass);
         }
 
       ////  System.out.println("found seat that was deleted:"+foundSeat);
-        return null;
     }
 
 
@@ -463,49 +456,6 @@ plist.add(pass);
 
                 return null;
         }
-        //Fi  System.out.println("enter // fetchSeatByClassRowAndLetter");
-    }
-
-    // define getters for the cabins' rowLetters
-    public char[] lookupSeatLettersByCabinType(PassengerClass passengerClass) {
-        return switch (passengerClass) {
-            case FIRST -> firstClassCabin.getSeatLetters();
-            case BUSINESS -> businessClassCabin.getSeatLetters();
-            case TRAVELLER -> travellerClassCabin.getSeatLetters();
-        };
-    }
-
-
-    private void displayseatsbytypebyclass(PassengerClass pClass,
-                                           SeatType seatType) {
-        switch (pClass) {
-            case FIRST -> this.firstClassCabin.printSeatsBySeatType(seatType);
-            //     case BUSINESS -> this.businessClassCabin.printSeatingChart();
-            //         case TRAVELLER -> this.travellerClassCabin.printSeatingChart();
-        }
-        ;
-    }
-
-    public Cabin getClassCabin(PassengerClass pClass) {
-        return switch (pClass) {
-            case FIRST -> firstClassCabin;
-            case BUSINESS -> businessClassCabin;
-            case TRAVELLER -> travellerClassCabin;
-        };
-    }
-
-
-    public void printSeatingMap() {
-
-        System.out.println("printing the seat chart for the entire flight");
-
-        this.firstClassCabin.printSeatingChart();
-
-        this.businessClassCabin.printSeatingChart();
-
-        this.travellerClassCabin.printSeatingChart();
-
-
     }
 
     public boolean isSpecificSeatAvailable(PassengerClass passengerClass, String seatSelection) {
@@ -558,19 +508,17 @@ plist.add(pass);
 
 
             return chosenClass;
-            //       THIS.Seat[][] seats = flight.displayClassSeats(PassengerClass.valueOf(classChoice));
-            //       int startRow = flight.getClassCabin(chosenClass).getStartRow();
-            //    printSeatMap(chosenClass, seats, startRow);
+
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid input. Please enter a valid class.");
             return null;
         }
     }
-public Seat cancelFlight(String passortNumber) {
+public void cancelFlight(String passportNumber) {
 
     System.out.println("cancelFlight // enter ");
 
-    System.out.println("deleting a reservation w/ passport number" + passortNumber);
+    System.out.println("deleting a reservation w/ passport number" + passportNumber);
 
     Seat foundSeat = null;
 
@@ -578,17 +526,7 @@ public Seat cancelFlight(String passortNumber) {
         for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
 
             Seat seat = this.firstClassCabin.seats[row][seatIndex];
-            System.out.println("checking: "+seat);
-
-            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
-
-                System.out.println("found seat matching passport;");
-
-                seat.setBooked(false);
-                seat.setPassenger(null);
-
-                foundSeat = seat;
-            }
+            foundSeat = getSeat(passportNumber, foundSeat, seat);
 
         }
     }
@@ -599,13 +537,13 @@ public Seat cancelFlight(String passortNumber) {
             Seat seat = this.businessClassCabin.seats[row][seatIndex];
             System.out.println("checking: "+seat);
 
-            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
 
                 System.out.println("eat.isBooked(): "+seat.isBooked());
 
 
                 System.out.println("seat.getPassenger().getPassportNumber(): "+seat.getPassenger().getPassportNumber());
-                System.out.println("passortNumber"+seat);
+                System.out.println("passportNumber"+seat);
 
                 System.out.println("found seat matching passport;");
 
@@ -622,29 +560,32 @@ public Seat cancelFlight(String passortNumber) {
         for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
 
             Seat seat = this.travellerClassCabin.seats[row][seatIndex];
-            System.out.println("checking: "+seat);
-            if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
-
-                System.out.println("found seat matching passport;");
-
-                seat.setBooked(false);
-                seat.setPassenger(null);
-
-                foundSeat = seat;
-            }
+            foundSeat = getSeat(passportNumber, foundSeat, seat);
 
         }
     }
 
     System.out.println("found seat that was deleted:"+foundSeat);
-    return foundSeat;
 }
 
-    public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
+    private Seat getSeat(String passportNumber, Seat foundSeat, Seat seat) {
+        System.out.println("checking: "+seat);
+
+        if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
+
+            System.out.println("found seat matching passport;");
+
+            seat.setBooked(false);
+            seat.setPassenger(null);
+
+            foundSeat = seat;
+        }
+        return foundSeat;
+    }
+
+    public void displayPassengerInfoByPassportNumber(String passportNumber) {
 
         System.out.println("displayPassengerInfoByPasspoerNumber // enter ");
-
-        //    System.out.println("displayPassengerInfoByPasspoerNumber a reserveration w/ passort number" + passortNumber);
 
         Seat foundSeat = null;
 
@@ -652,14 +593,10 @@ public Seat cancelFlight(String passortNumber) {
             for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
 
                 Seat seat = this.firstClassCabin.seats[row][seatIndex];
-                //       System.out.println("checking: "+seat);
 
-                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
+                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
 
                     System.out.println("found seat matching passport;");
-
-                    //        seat.setBooked(false);
-                    //      seat.setPassenger(null);
 
                     foundSeat = seat;
                 }
@@ -671,20 +608,11 @@ public Seat cancelFlight(String passortNumber) {
             for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
 
                 Seat seat = this.businessClassCabin.seats[row][seatIndex];
-                //     System.out.println("checking: "+seat);
-
-                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
-
-                    //    System.out.println("eat.isBooked(): "+seat.isBooked());
 
 
-                    //     System.out.println("seat.getPassenger().getPassportNumber(): "+seat.getPassenger().getPassportNumber());
-                    //    System.out.println("passortNumber"+seat);
+                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
 
-                    //    System.out.println("found seat matching passport;");
 
-                    //     seat.setBooked(false);
-                    //     seat.setPassenger(null);
 
                     foundSeat = seat;
                 }
@@ -696,13 +624,10 @@ public Seat cancelFlight(String passortNumber) {
             for (int seatIndex = 0; seatIndex < this.travellerClassCabin.getSeatLetters().length; seatIndex++) {
 
                 Seat seat = this.travellerClassCabin.seats[row][seatIndex];
-                //   System.out.println("checking: "+seat);
-                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passortNumber)) {
 
-                    //     System.out.println("found seat matching passport;");
+                if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
 
-                    //     seat.setBooked(false);
-                    //     seat.setPassenger(null);
+
 
                     foundSeat = seat;
                 }
@@ -710,38 +635,19 @@ public Seat cancelFlight(String passortNumber) {
             }
         }
 
-        //    System.out.println("found seat that was deleted:"+foundSeat);
-
         if(foundSeat!=null) {
 
         System.out.println("First name\tLast name\tPassport number\tSeat reserved\tClass\tType");
 //First name	Last name	Passport number	Seat reserved	Class	Type
 //Akram	Khan	JJO3412	24A	Traveller	Window
-        System.out.print(foundSeat.getPassenger().getFirstName());
-        System.out.print("\t");
+            seatInfo(foundSeat);
 
-        System.out.print(foundSeat.getPassenger().getLastName());
+            System.out.println(foundSeat.getType());
         System.out.print("\t");
-
-        System.out.print(foundSeat.getPassenger().getPassportNumber());
-        System.out.print("\t");
-
-        System.out.print(foundSeat.getSeatNumber());
-        System.out.print("\t");
-        System.out.print(foundSeat.getPassengerClass());
-        System.out.print("\t");
-
-        System.out.println(foundSeat.getType());
-        System.out.print("\t");
+        }
     }
 
-
-
-
-        return foundSeat;
-    }
-
-    public Seat displayPassengerInfoByPassengerLastName(String lastName) {
+    public void displayPassengerInfoByPassengerLastName(String lastName) {
       //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
 
             System.out.println("displayPassengerInfoByPasspoerNumber // enter ");
@@ -763,8 +669,7 @@ public Seat cancelFlight(String passortNumber) {
 
                             System.out.println("found seat matching last name;");
 
-                        //        seat.setBooked(false);
-                        //      seat.setPassenger(null);
+
 
                         foundSeat = seat;
                     }
@@ -811,29 +716,13 @@ public Seat cancelFlight(String passortNumber) {
             System.out.println("First name\tLast name\tPassport number\tSeat reserved\tClass\tType");
 //First name	Last name	Passport number	Seat reserved	Class	Type
 //Akram	Khan	JJO3412	24A	Traveller	Window
-            System.out.print(foundSeat.getPassenger().getFirstName());
-            System.out.print("\t");
-
-            System.out.print(foundSeat.getPassenger().getLastName());
-            System.out.print("\t");
-
-            System.out.print(foundSeat.getPassenger().getPassportNumber());
-            System.out.print("\t");
-
-            System.out.print(foundSeat.getSeatNumber());
-            System.out.print("\t");
-            System.out.print(foundSeat.getPassengerClass());
-            System.out.print("\t");
+            seatInfo(foundSeat);
 
             System.out.println(foundSeat.getType());
             System.out.print("\t");
 
         }
-
-
-
-            return foundSeat;
-        }
+    }
 
     public void calculateRevenueFromReservations() {
         //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
@@ -902,7 +791,7 @@ public Seat cancelFlight(String passortNumber) {
         // output the number of seats booked in the cabin, and the total revenue from that cabin
         System.out.println("First\t\t" +firstClassCounter +"\t $" + firstClassCounter * 1800);
         System.out.println("Business\t\t"+ businessClassCounter +"\t $" +  businessClassCounter * 1200);
-        System.out.println("Traveller\t" + + travellerClassCounter +"\t $" + travellerClassCounter * 1000);
+        System.out.println("Traveller\t" + travellerClassCounter +"\t $" + travellerClassCounter * 1000);
         
         System.out.println();
 
@@ -915,7 +804,7 @@ public Seat cancelFlight(String passortNumber) {
 
 
 
-        List<Seat> seatList = new ArrayList<Seat>();
+        List<Seat> seatList = new ArrayList<>();
 
         for (int row = 0; row < this.firstClassCabin.getNumberOfRows(); row++) {
             for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
@@ -988,19 +877,28 @@ public Seat cancelFlight(String passortNumber) {
 
       for(Seat seat:seatList) {
 
-          System.out.print(seat.getPassenger().getFirstName());System.out.print("\t");
-          System.out.print(seat.getPassenger().getLastName());System.out.print("\t");
-          System.out.print(seat.getPassenger().getPassportNumber());System.out.print("\t");
-          System.out.print(seat.getSeatNumber());System.out.print("\t");
-          System.out.print(seat.getPassengerClass());System.out.print("\t");
+          seatInfo(seat);
           System.out.print(seat.getType());System.out.print("\t");
 
-          System.out.println("");
+          System.out.println();
 
          // System.out.print("\t");
 
 
 
       }
+    }
+
+    private void seatInfo(Seat seat) {
+        System.out.print(seat.getPassenger().getFirstName());
+        System.out.print("\t");
+        System.out.print(seat.getPassenger().getLastName());
+        System.out.print("\t");
+        System.out.print(seat.getPassenger().getPassportNumber());
+        System.out.print("\t");
+        System.out.print(seat.getSeatNumber());
+        System.out.print("\t");
+        System.out.print(seat.getPassengerClass());
+        System.out.print("\t");
     }
 }

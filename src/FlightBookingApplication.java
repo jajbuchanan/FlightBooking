@@ -50,7 +50,7 @@ flight.printSeatingChart();
                 String passportNum = keyboard.next();
                 System.out.println("passportNum " + passportNum);
 
-                flight.displayPassengerInfoByPasspoerNumber(passportNum);
+                flight.displayPassengerInfoByPassportNumber(passportNum);
 
             }  else   if (menuSelection ==5) {
 
