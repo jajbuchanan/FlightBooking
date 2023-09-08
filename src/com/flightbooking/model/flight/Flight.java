@@ -35,7 +35,6 @@ private final Scanner keyboard = new Scanner(System.in);
                 this.businessClassCabin.getLogicalRowNumberOffset()
                         + this.businessClassCabin.getNumberOfRows());
         this.travellerClassCabin.initializeSeats();
-      //  this.travellerClassCabin.setLogicalRowNumberOffset(this.firstClassCabin.getNumberOfRows() + this.businessClassCabin.getNumberOfRows());
     }
 
 
@@ -44,7 +43,6 @@ private final Scanner keyboard = new Scanner(System.in);
         this.firstClassCabin.printSeatingChart();
         this.businessClassCabin.printSeatingChart();
         this.travellerClassCabin.printSeatingChart();
-
     }
 
     public void printSeatingChart(PassengerClass passengerClass) {
@@ -55,14 +53,13 @@ private final Scanner keyboard = new Scanner(System.in);
         }
     }
 
-
     public Seat chooseSeatByTypeGivenClass(PassengerClass passengerClass) {
 
         Seat seat = null;
         String userSeatSelection;
 
         try {
-//
+
             System.out.println("passengerClass: " + passengerClass);
 
             System.out.println(" Enter the choice of seat type (window, standard, aisle) or seat number: ");
@@ -87,7 +84,6 @@ private final Scanner keyboard = new Scanner(System.in);
 
                 System.out.println("is isIndividualSeatAvailable: + " + isIndividualSeatAvailable);
 
-
                 if (userSeatSelection.matches("[0-9A-Z]+") && !isIndividualSeatAvailable) {
 
                     System.out.println("user wanted a specific seat, but not available: + ");
@@ -103,7 +99,6 @@ private final Scanner keyboard = new Scanner(System.in);
                     System.out.println("returned seat: " + seat);
 
                 }
-
                 System.out.println("user seat choice " + userSeatSelection);
 
                 seat = fetchSeat(passengerClass, userSeatSelection);
@@ -113,10 +108,7 @@ private final Scanner keyboard = new Scanner(System.in);
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid input. Please enter a valid class.");
         }
-
         return seat;
-
-
     }
 
     private Seat fetchSeatByClassByType(PassengerClass passengerClass, String seatType) {
@@ -126,17 +118,13 @@ private final Scanner keyboard = new Scanner(System.in);
                 for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
 
                     Seat seat = this.firstClassCabin.seats[row][seatIndex];
-                    //   System.out.println("checking: "+seat);
 
                     if (seat.isAvailable()&&seat.getType().toString().toUpperCase().equals(seatType.toUpperCase().trim())) {
-
-
 
                         System.out.println("found available seat matching seat type;");
 
                         return seat;
                     }
-
                 }
             }
         }
@@ -154,7 +142,6 @@ private final Scanner keyboard = new Scanner(System.in);
 
                         return seat;
                     }
-
                 }
             }
         }
@@ -169,16 +156,12 @@ private final Scanner keyboard = new Scanner(System.in);
 
                         System.out.println("found available seat;");
 
-
-
                         return seat;
                     }
 
                 }
             }
         }
-
-        ////  System.out.println("found seat that was deleted:"+foundSeat);
         return null;
     }
     public void chooseSeatsForGroup(PassengerClass classSelection, int  groupSize) {
@@ -224,7 +207,6 @@ plist.add(pass);
                 System.out.println("userSeatSelection: " + userSeatSelection);
                 pass.setFirstName(userSeatSelection);
 
-//
                 System.out.print("  Enter the 2nd passenger’s last name: ");
 
                 userSeatSelection = keyboard.next().toUpperCase();
@@ -250,14 +232,12 @@ plist.add(pass);
                 System.out.println("userSeatSelection: " + userSeatSelection);
                 pass.setFirstName(userSeatSelection);
 
-//
                 System.out.print("  Enter the 3rd passenger’s last name: ");
 
                 userSeatSelection = keyboard.next().toUpperCase();
 
                 System.out.println("userSeatSelection: " + userSeatSelection);
                 pass.setLastName(userSeatSelection);
-                //
 
                 System.out.print("  Enter the 3rd passport number: ");
 
@@ -268,12 +248,9 @@ plist.add(pass);
                 plist.add(pass);
 
             }
-
         }
-
         for(Passenger passenger:plist){
             reserveFirstAvailableSeatInClass(classSelection,passenger);}
-
     }
 
     private void reserveFirstAvailableSeatInClass(PassengerClass passengerClass, Passenger passenger ) {
@@ -283,7 +260,6 @@ plist.add(pass);
                 for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
 
                     Seat seat = this.firstClassCabin.seats[row][seatIndex];
-                    //   System.out.println("checking: "+seat);
 
                     if (seat.isAvailable()) {
 
@@ -294,7 +270,6 @@ plist.add(pass);
 
                       return;
                     }
-
                 }
             }
         }
@@ -304,7 +279,6 @@ plist.add(pass);
                 for (int seatIndex = 0; seatIndex < this.businessClassCabin.getSeatLetters().length; seatIndex++) {
 
                     Seat seat = this.businessClassCabin.seats[row][seatIndex];
-                //    System.out.println("checking: "+seat);
 
                     if (seat.isAvailable()) {
 
@@ -315,7 +289,6 @@ plist.add(pass);
 
                         return;
                     }
-
                 }
             }
         }
@@ -335,12 +308,9 @@ plist.add(pass);
 
                         return;
                     }
-
                 }
             }
         }
-
-      ////  System.out.println("found seat that was deleted:"+foundSeat);
     }
 
 
@@ -360,9 +330,9 @@ plist.add(pass);
 
 
         System.out.println("raw this.firstClassCabin.logicalRowNumberOffset: " + this.firstClassCabin.logicalRowNumberOffset);
-        System.out.println("raw this.businessClassCabin.logicalRowNumberOffset;: " +this.businessClassCabin.logicalRowNumberOffset);
+        System.out.println("raw this.businessClassCabin.logicalRowNumberOffset: " +this.businessClassCabin.logicalRowNumberOffset);
 
-        System.out.println("raw this.travellerClassCabin.logicalRowNumberOffse: " +this.travellerClassCabin.logicalRowNumberOffset);
+        System.out.println("raw this.travellerClassCabin.logicalRowNumberOffset: " +this.travellerClassCabin.logicalRowNumberOffset);
 
         switch (passengerClass) {
             case FIRST ->logicalSeatRow=rowNumber- this.firstClassCabin.logicalRowNumberOffset;
@@ -370,7 +340,6 @@ plist.add(pass);
             case TRAVELLER -> logicalSeatRow=rowNumber- this.travellerClassCabin.logicalRowNumberOffset;
         }
 
-    //    logicalSeatRow = rowNumber;
         System.out.println("logicalSeatRow: " + logicalSeatRow);
 
         System.out.println("seatLetter: " + seatLetter);
@@ -386,8 +355,6 @@ plist.add(pass);
     public Seat fetchSeatByClassRowAndLetter(PassengerClass passengerClass, int logicalSeatRow, char seatLetter) {
         System.out.println("enter // fetchSeatByClassRowAndLetter");
 
-
-
         System.out.println("logicalSeatRow!!!: " + logicalSeatRow);
 
         switch (passengerClass) {
@@ -396,37 +363,19 @@ plist.add(pass);
 
                 System.out.println("here");
 
-
-     //           int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
-
-            //    System.out.println("logicalSeatRow: " + logicalSeatRow);
-
-            //    System.out.println("adjustedRow" + adjustedRow);
-
-                //    for(){
-
-                //    }
                 Seat seat = firstClassCabin.seats[logicalSeatRow][firstClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
 
                 System.out.println("seat from the fetch" + seat);
 
                 return seat;
+
             case BUSINESS:
 
                 System.out.println("BUSINESS BUSINESS BUSINESS");
 
                 System.out.println("logicalSeatRow!!!: " + logicalSeatRow);
 
-                //           int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
-
-                //    System.out.println("logicalSeatRow: " + logicalSeatRow);
-
-                //    System.out.println("adjustedRow" + adjustedRow);
-
-                //    for(){
-
-                //    }
-                 seat = this.businessClassCabin.seats[logicalSeatRow][businessClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
+                seat = this.businessClassCabin.seats[logicalSeatRow][businessClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
 
                 System.out.println("seat from the fetch" + seat);
 
@@ -436,16 +385,6 @@ plist.add(pass);
 
                 System.out.println("TRAVELLER TRAVELLER TRAVELLER");
 
-
-                //           int adjustedRow = logicalSeatRow - this.firstClassCabin.getLogicalRowNumberOffset();
-
-                //    System.out.println("logicalSeatRow: " + logicalSeatRow);
-
-                //    System.out.println("adjustedRow" + adjustedRow);
-
-                //    for(){
-
-                //    }
                 seat = this.travellerClassCabin.seats[logicalSeatRow][travellerClassCabin.deriveSeatNumberForSeatLater(seatLetter)];
 
                 System.out.println("seat from the fetch" + seat);
@@ -473,7 +412,7 @@ plist.add(pass);
         System.out.println("raw this.firstClassCabin.logicalRowNumberOffset: " + this.firstClassCabin.logicalRowNumberOffset);
         System.out.println("raw this.businessClassCabin.logicalRowNumberOffset;: " +this.businessClassCabin.logicalRowNumberOffset);
 
-        System.out.println("raw this.travellerClassCabin.logicalRowNumberOffse: " +this.travellerClassCabin.logicalRowNumberOffset);
+        System.out.println("raw this.travellerClassCabin.logicalRowNumberOffset: " +this.travellerClassCabin.logicalRowNumberOffset);
 
         switch (passengerClass) {
             case FIRST ->adjustedrownum=rowNumber- this.firstClassCabin.logicalRowNumberOffset;
@@ -481,7 +420,7 @@ plist.add(pass);
             case TRAVELLER -> adjustedrownum=rowNumber- this.travellerClassCabin.logicalRowNumberOffset;
         }
 
-        System.out.println("adjustedrownum: " + adjustedrownum);
+        System.out.println("adjustedRowNum: " + adjustedrownum);
 
         System.out.println("seatLetter: " + seatLetter);
 
@@ -489,7 +428,6 @@ plist.add(pass);
         System.out.println("specificSeat: " + specificSeat);
 
         return specificSeat.isAvailable();
-
     }
 
     public PassengerClass promptUserToSelectCabin() {
@@ -527,7 +465,6 @@ public void cancelFlight(String passportNumber) {
 
             Seat seat = this.firstClassCabin.seats[row][seatIndex];
             foundSeat = getSeat(passportNumber, foundSeat, seat);
-
         }
     }
 
@@ -552,7 +489,6 @@ public void cancelFlight(String passportNumber) {
 
                 foundSeat = seat;
             }
-
         }
     }
 
@@ -564,7 +500,6 @@ public void cancelFlight(String passportNumber) {
 
         }
     }
-
     System.out.println("found seat that was deleted:"+foundSeat);
 }
 
@@ -585,7 +520,7 @@ public void cancelFlight(String passportNumber) {
 
     public void displayPassengerInfoByPassportNumber(String passportNumber) {
 
-        System.out.println("displayPassengerInfoByPasspoerNumber // enter ");
+        System.out.println("displayPassengerInfoByPassportNumber // enter ");
 
         Seat foundSeat = null;
 
@@ -600,7 +535,6 @@ public void cancelFlight(String passportNumber) {
 
                     foundSeat = seat;
                 }
-
             }
         }
 
@@ -609,14 +543,9 @@ public void cancelFlight(String passportNumber) {
 
                 Seat seat = this.businessClassCabin.seats[row][seatIndex];
 
-
                 if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
-
-
-
                     foundSeat = seat;
                 }
-
             }
         }
 
@@ -626,12 +555,8 @@ public void cancelFlight(String passportNumber) {
                 Seat seat = this.travellerClassCabin.seats[row][seatIndex];
 
                 if (seat.isBooked() && Objects.equals(seat.getPassenger().getPassportNumber(), passportNumber)) {
-
-
-
                     foundSeat = seat;
                 }
-
             }
         }
 
@@ -648,11 +573,8 @@ public void cancelFlight(String passportNumber) {
     }
 
     public void displayPassengerInfoByPassengerLastName(String lastName) {
-      //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
 
-            System.out.println("displayPassengerInfoByPasspoerNumber // enter ");
-
-            //    System.out.println("displayPassengerInfoByPasspoerNumber a reserveration w/ passort number" + passortNumber);
+            System.out.println("displayPassengerInfoByPassportNumber // enter ");
 
             Seat foundSeat = null;
 
@@ -660,20 +582,14 @@ public void cancelFlight(String passportNumber) {
                 for (int seatIndex = 0; seatIndex < this.firstClassCabin.getSeatLetters().length; seatIndex++) {
 
                     Seat seat = this.firstClassCabin.seats[row][seatIndex];
-                    //       System.out.println("checking: "+seat);
 
                         if (seat.isBooked() && Objects.equals(seat.getPassenger().getLastName().toUpperCase().trim(),
                                 lastName.toUpperCase().trim()
-
                         )) {
 
                             System.out.println("found seat matching last name;");
-
-
-
                         foundSeat = seat;
                     }
-
                 }
             }
 
@@ -700,7 +616,6 @@ public void cancelFlight(String passportNumber) {
                     Seat seat = this.travellerClassCabin.seats[row][seatIndex];
                     if (seat.isBooked() && Objects.equals(seat.getPassenger().getLastName().toUpperCase().trim(),
                             lastName.toUpperCase().trim()
-
                     )) {
 
                         System.out.println("found seat matching last name;");
@@ -712,7 +627,7 @@ public void cancelFlight(String passportNumber) {
 
             //    System.out.println("found seat that was deleted:"+foundSeat);
 
-        if(foundSeat!=null) {
+        if (foundSeat!=null) {
             System.out.println("First name\tLast name\tPassport number\tSeat reserved\tClass\tType");
 //First name	Last name	Passport number	Seat reserved	Class	Type
 //Akram	Khan	JJO3412	24A	Traveller	Window
@@ -725,9 +640,6 @@ public void cancelFlight(String passportNumber) {
     }
 
     public void calculateRevenueFromReservations() {
-        //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
-
-        //   System.out.println("calculateRevenueFromReservations // enter ");
 
         // declare counters by class
         int firstClassCounter = 0;
@@ -745,9 +657,7 @@ public void cancelFlight(String passportNumber) {
                     System.out.println("found booked seat");
 
                     firstClassCounter++;
-
                 }
-
             }
         }
         // iterate through business class, increment businessClassCounter by 1 for every booked seat found
@@ -761,9 +671,7 @@ public void cancelFlight(String passportNumber) {
                     System.out.println("found booked seat");
 
                     businessClassCounter++;
-
                 }
-
             }
         }
         
@@ -778,9 +686,7 @@ public void cancelFlight(String passportNumber) {
                     System.out.println("found booked seat");
 
                     travellerClassCounter++;
-
                 }
-
             }
         }
 
@@ -794,15 +700,8 @@ public void cancelFlight(String passportNumber) {
         System.out.println("Traveller\t" + travellerClassCounter +"\t $" + travellerClassCounter * 1000);
         
         System.out.println();
-
-
     }
     public void generateReportOfUserReservation() {
-        //  public Seat displayPassengerInfoByPasspoerNumber(String passortNumber) {
-
-        //   System.out.println("calculateRevenueFromReservations // enter ");
-
-
 
         List<Seat> seatList = new ArrayList<>();
 
@@ -816,9 +715,7 @@ public void cancelFlight(String passportNumber) {
                     System.out.println("found booked seat");
 
                   seatList.add(seat);
-
                 }
-
             }
         }
 
@@ -834,7 +731,6 @@ public void cancelFlight(String passportNumber) {
                     seatList.add(seat);
 
                 }
-
             }
         }
 
@@ -849,30 +745,12 @@ public void cancelFlight(String passportNumber) {
                     seatList.add(seat);
 
                 }
-
             }
         }
 
-      //  System.out.println(seatList);
 
         Collections.sort(seatList);
 
-   //     System.out.println(seatList);
-
-        //Collections.sor(seatList);
-
-    //    System.out.println(seatList);
-
-      //  System.out.println("Class\tQuantity\tPrice");
-     //   System.out.println();
-
-      //  System.out.println("First\t\t" +firstClassCounter +"\t" + firstClassCounter * 1800);
-      //  System.out.println("Business\t\t"+ businesslassCounter +"\t" +  businesslassCounter * 1200);
-    //    System.out.println("Traveller\t" + + travellerClassCounter +"\t" + + travellerClassCounter * 1000);
-
-
-      //  System.out.println();
-    //    Table 11. Sample report – passenger data sorted alphabetically by last name
       System.out.println("  First name	Last name	Passport number	Seat reserved	Class	Type");
 
       for(Seat seat:seatList) {
@@ -881,11 +759,6 @@ public void cancelFlight(String passportNumber) {
           System.out.print(seat.getType());System.out.print("\t");
 
           System.out.println();
-
-         // System.out.print("\t");
-
-
-
       }
     }
 
